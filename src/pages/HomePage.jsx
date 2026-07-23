@@ -6,6 +6,7 @@ import SectionHeading from '../components/common/SectionHeading'
 import { activityDirections, federationInfo, federationPreview } from '../data/federation'
 import { coaches, leadership } from '../data/coaches'
 import { news } from '../data/news'
+import { sortNewsByDate } from '../utils/news'
 
 function HeroSection() {
   return (
@@ -144,11 +145,7 @@ function ActivityDirections() {
 }
 
 function LatestNews() {
-  const latestNews = [...news]
-    .sort((firstItem, secondItem) => {
-      return new Date(secondItem.date) - new Date(firstItem.date)
-    })
-    .slice(0, 3)
+  const latestNews = sortNewsByDate(news).slice(0, 3)
 
   return (
     <Section className="pt-16 sm:pt-20">
