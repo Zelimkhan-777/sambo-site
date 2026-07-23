@@ -5,4 +5,5 @@ export const navigationItems = [
   { to: '/grants', label: 'Гранты' },
   { to: '/news', label: 'Новости' },
   { to: '/coaches', label: 'Тренеры' },
+  { to: '#contacts', label: 'Контакты', isAnchor: true },
 ]

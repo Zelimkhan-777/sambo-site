@@ -1,17 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --surface: #f5f5f5;
-  --surface-strong: #ebebeb;
-  --foreground: #0a0a0a;
-  --foreground-soft: #1f1f1f;
-  --muted-foreground: #666666;
-  --border: #e5e5e5;
-  --border-strong: #cdcdcd;
+  --background: #fafaf8;
+  --surface: #f1f1ee;
+  --surface-strong: #e5e5e1;
+  --foreground: #1a1a19;
+  --foreground-soft: #30302e;
+  --muted-foreground: #666663;
+  --border: #deded9;
+  --border-strong: #c4c4be;
   --accent-red: #b91c1c;
+  --accent-red-strong: #991b1b;
   --accent-blue: #1d4ed8;
-  font-family: "Segoe UI", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: "Manrope", "Segoe UI", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Barlow Condensed", "Arial Narrow", "Segoe UI", sans-serif;
+  font-family: var(--font-body);
   line-height: 1.5;
   font-weight: 400;
   color: var(--foreground);
@@ -23,16 +27,25 @@
   color-scheme: light;
 }
 
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
 :root.dark {
-  --background: #0a0a0a;
-  --surface: #171717;
-  --surface-strong: #222222;
-  --foreground: #f5f5f5;
-  --foreground-soft: #e5e5e5;
-  --muted-foreground: #a3a3a3;
-  --border: #2e2e2e;
-  --border-strong: #434343;
+  --background: #111211;
+  --surface: #1a1c1b;
+  --surface-strong: #252725;
+  --foreground: #e7e7e2;
+  --foreground-soft: #d0d0ca;
+  --muted-foreground: #a2a39d;
+  --border: #343733;
+  --border-strong: #4b4f4a;
   --accent-red: #dc2626;
+  --accent-red-strong: #ef4444;
   --accent-blue: #3b82f6;
   color-scheme: dark;
 }

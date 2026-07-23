@@ -2,9 +2,9 @@ import { Link } from 'react-router-dom'
 
 const variantClasses = {
   primary:
-    'border-[color:var(--foreground)] bg-[color:var(--foreground)] text-[color:var(--background)] hover:border-[color:var(--foreground-soft)] hover:bg-[color:var(--foreground-soft)]',
+    'border-[color:var(--accent-red)] bg-[color:var(--accent-red)] text-white hover:border-[color:var(--accent-red-strong)] hover:bg-[color:var(--accent-red-strong)]',
   secondary:
-    'border-[color:var(--border-strong)] bg-[color:var(--surface)] text-[color:var(--foreground)] hover:border-[color:var(--foreground)] hover:bg-[color:var(--surface-strong)]',
+    'border-[color:var(--border-strong)] bg-transparent text-[color:var(--foreground)] hover:border-[color:var(--foreground-soft)] hover:bg-[color:var(--surface)]',
   text:
     'border-transparent bg-transparent text-[color:var(--foreground)] hover:text-[color:var(--accent-blue)]',
 }

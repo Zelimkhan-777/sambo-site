@@ -1,66 +1,37 @@
 import Button from '../components/ui/Button'
 import EmptyState from '../components/common/EmptyState'
+import HeroSlider from '../components/common/HeroSlider'
+import MediaPlaceholder, { Users } from '../components/common/MediaPlaceholder'
 import NewsCard from '../components/common/NewsCard'
 import Section from '../components/common/Section'
 import SectionHeading from '../components/common/SectionHeading'
-import { activityDirections, federationInfo, federationPreview } from '../data/federation'
+import { federationInfo, federationPreview } from '../data/federation'
 import { coaches, leadership } from '../data/coaches'
+import { heroSlides, leadershipMedia } from '../data/media'
 import { news } from '../data/news'
 import { sortNewsByDate } from '../utils/news'
 
 function HeroSection() {
   return (
     <Section className="pt-2">
-      <div className="grid gap-6 border border-[color:var(--border)] bg-[color:var(--surface)] p-6 sm:p-8 lg:grid-cols-[minmax(0,1.15fr)_minmax(320px,0.85fr)] lg:p-10">
-        <div className="flex flex-col justify-between">
-          <div>
-            <p className="text-xs uppercase tracking-[0.24em] text-[color:var(--muted-foreground)]">
-              Федерация самбо Чеченской Республики
-            </p>
-            <h1 className="mt-5 max-w-3xl text-4xl font-semibold tracking-[-0.05em] text-[color:var(--foreground)] sm:text-5xl lg:text-[3.5rem] lg:leading-[1.02]">
+      <HeroSlider slides={heroSlides}>
+          <div className="max-w-2xl">
+            <h1 className="max-w-xl text-5xl font-semibold leading-[0.92] tracking-[-0.02em] sm:text-6xl lg:text-7xl">
               Сила. Дисциплина. Традиции.
             </h1>
-            <p className="mt-5 max-w-2xl text-base leading-8 text-[color:var(--muted-foreground)] sm:text-lg">
+            <p className="mt-6 max-w-xl text-base leading-8 text-white/80 sm:text-lg">
               Федерация развивает спортивное и боевое самбо в Чеченской
               Республике, поддерживает подготовку спортсменов и объединяет
               работу тренеров, судей и профильных спортивных инициатив.
             </p>
-          </div>
-
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <Button to="/about">О Федерации</Button>
-            <Button to="/news" variant="secondary">
-              Последние новости
-            </Button>
-          </div>
-        </div>
-
-        <div className="relative min-h-[320px] overflow-hidden border border-[color:var(--border)] bg-[color:var(--background)] p-5">
-          <div className="flex h-full flex-col justify-between">
-            <div className="flex items-center justify-between gap-4 text-[11px] uppercase tracking-[0.18em] text-[color:var(--muted-foreground)]">
-              <span>Hero Placeholder</span>
-              <span>Image Pending</span>
-            </div>
-
-            <div className="grid gap-3">
-              <div className="h-24 border border-[color:var(--border)] bg-[color:var(--surface)]" />
-              <div className="grid grid-cols-[1.15fr_0.85fr] gap-3">
-                <div className="h-32 border border-[color:var(--border)] bg-[color:var(--surface)]" />
-                <div className="h-32 border border-[color:var(--border)] bg-[color:var(--surface-strong)]" />
-              </div>
-            </div>
-
-            <div className="max-w-sm border-t border-[color:var(--border)] pt-4">
-              <p className="text-sm leading-7 text-[color:var(--muted-foreground)]">
-                Подходящее изображение для hero будет добавлено после проверки
-                источника и подготовки локального материала.
-              </p>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <Button to="/about">О Федерации</Button>
+              <Button to="/news" variant="secondary" className="border-white/50 bg-white/10 text-white hover:border-white hover:bg-white/20">
+                Последние новости
+              </Button>
             </div>
           </div>
-
-          <div className="pointer-events-none absolute right-5 top-5 h-14 w-14 border border-[color:var(--accent-red)]" />
-        </div>
-      </div>
+      </HeroSlider>
     </Section>
   )
 }
@@ -105,40 +76,6 @@ function AboutPreview() {
             </li>
           ))}
         </ul>
-      </div>
-    </Section>
-  )
-}
-
-function ActivityDirections() {
-  return (
-    <Section className="pt-16 sm:pt-20">
-      <SectionHeading
-        eyebrow="Направления"
-        title="Ключевые направления деятельности"
-        description="Главная страница показывает основные области работы федерации без подмены их статистикой или неподтверждёнными достижениями."
-      />
-
-      <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-        {activityDirections.map((direction) => (
-          <article
-            key={direction.id}
-            className="border border-[color:var(--border)] bg-[color:var(--background)] p-5"
-          >
-            <div className="flex items-center justify-between gap-4">
-              <span className="text-sm font-medium text-[color:var(--accent-blue)]">
-                {direction.number}
-              </span>
-              <div className="h-px flex-1 bg-[color:var(--border)]" />
-            </div>
-            <h3 className="mt-5 text-xl font-semibold tracking-[-0.03em] text-[color:var(--foreground)]">
-              {direction.title}
-            </h3>
-            <p className="mt-3 text-sm leading-7 text-[color:var(--muted-foreground)]">
-              {direction.description}
-            </p>
-          </article>
-        ))}
       </div>
     </Section>
   )
@@ -197,11 +134,18 @@ function LeadershipPreview() {
         {people.map((person) => (
           <article
             key={person.id}
-            className="border border-[color:var(--border)] bg-[color:var(--surface)] p-5"
+            className="border-l-2 border-[color:var(--border-strong)] bg-[color:var(--surface)] p-5 transition-colors duration-200 hover:border-[color:var(--accent-red)]"
           >
-            <div className="flex h-14 w-14 items-center justify-center border border-[color:var(--border-strong)] bg-[color:var(--background)] text-sm font-semibold tracking-[0.14em] text-[color:var(--foreground)]">
-              {person.initials}
-            </div>
+            {leadershipMedia[person.id] ? (
+              <img
+                alt={leadershipMedia[person.id].alt}
+                className="aspect-[4/3] w-full object-cover"
+                loading="lazy"
+                src={leadershipMedia[person.id].src}
+              />
+            ) : (
+              <MediaPlaceholder compact icon={Users} label="Фотография представителя готовится" />
+            )}
             <h3 className="mt-5 text-lg font-semibold tracking-[-0.03em] text-[color:var(--foreground)]">
               {person.name}
             </h3>
@@ -276,7 +220,6 @@ function HomePage() {
     <>
       <HeroSection />
       <AboutPreview />
-      <ActivityDirections />
       <LatestNews />
       <LeadershipPreview />
       <ContactCTA />

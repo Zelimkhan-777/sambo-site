@@ -1,3 +1,5 @@
+import { newsMedia } from './media'
+
 export const news = [
   {
     id: 1,
@@ -11,10 +13,11 @@ export const news = [
     ],
     category: 'Обновление раздела',
     publishedAt: '2026-07-20',
-    coverImage: null,
+    coverImage: newsMedia[0].src,
+    imageAlt: newsMedia[0].alt,
     isVerified: false,
-    sourceName: '',
-    sourceUrl: '',
+    sourceName: newsMedia[0].sourceName,
+    sourceUrl: newsMedia[0].sourceUrl,
     isTemporary: true,
   },
   {
@@ -29,10 +32,11 @@ export const news = [
     ],
     category: 'Подготовка контента',
     publishedAt: '2026-07-18',
-    coverImage: null,
+    coverImage: newsMedia[1].src,
+    imageAlt: newsMedia[1].alt,
     isVerified: false,
-    sourceName: '',
-    sourceUrl: '',
+    sourceName: newsMedia[1].sourceName,
+    sourceUrl: newsMedia[1].sourceUrl,
     isTemporary: true,
   },
   {
@@ -47,10 +51,11 @@ export const news = [
     ],
     category: 'Развитие сайта',
     publishedAt: '2026-07-15',
-    coverImage: null,
+    coverImage: newsMedia[2].src,
+    imageAlt: newsMedia[2].alt,
     isVerified: false,
-    sourceName: '',
-    sourceUrl: '',
+    sourceName: newsMedia[2].sourceName,
+    sourceUrl: newsMedia[2].sourceUrl,
     isTemporary: true,
   },
 ]

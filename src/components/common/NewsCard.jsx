@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { motion, useReducedMotion } from 'framer-motion'
 import { formatNewsDate } from '../../utils/news'
+import MediaPlaceholder from './MediaPlaceholder'
 
 function NewsCard({ item }) {
   const shouldReduceMotion = useReducedMotion()
@@ -16,24 +17,25 @@ function NewsCard({ item }) {
         className="flex h-full flex-col focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-blue)] focus-visible:ring-offset-2 focus-visible:ring-offset-[color:var(--background)]"
       >
         {item.coverImage ? (
-          <img
-            alt={item.title}
-            className="aspect-[16/10] w-full border-b border-[color:var(--border)] object-cover"
-            loading="lazy"
-            src={item.coverImage}
-          />
-        ) : (
-          <div className="flex aspect-[16/10] flex-col justify-between border-b border-[color:var(--border)] bg-[color:var(--surface-strong)] p-5">
-            <span className="inline-flex w-fit border border-[color:var(--border-strong)] px-2 py-1 text-[11px] uppercase tracking-[0.18em] text-[color:var(--muted-foreground)]">
-              {item.isTemporary ? 'Временный материал' : 'Материал'}
-            </span>
-            <div className="max-w-[12rem]">
-              <div className="h-px w-12 bg-[color:var(--accent-red)]" />
-              <p className="mt-3 text-sm leading-6 text-[color:var(--muted-foreground)]">
-                Изображение будет добавлено после проверки материалов.
-              </p>
-            </div>
+          <div className="relative aspect-[16/10] border-b border-[color:var(--border)] bg-[color:var(--surface-strong)]">
+            <img
+              alt={item.imageAlt || item.title}
+              className="h-full w-full object-cover"
+              loading="lazy"
+              src={item.coverImage}
+            />
+            {item.isTemporary ? (
+              <span className="absolute left-3 top-3 border border-white/50 bg-black/60 px-2 py-1 text-[10px] uppercase tracking-[0.14em] text-white">
+                Иллюстративное фото
+              </span>
+            ) : null}
           </div>
+        ) : (
+          <MediaPlaceholder
+            className="aspect-[16/10] border-0 border-b"
+            compact
+            label={item.isTemporary ? 'Иллюстративное фото' : 'Фотография готовится к публикации'}
+          />
         )}
 
         <div className="flex flex-1 flex-col px-5 py-5">

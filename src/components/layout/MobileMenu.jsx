@@ -1,13 +1,14 @@
+import { X } from 'lucide-react'
 import { useEffect, useRef } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
-import Button from '../ui/Button'
 import Container from '../ui/Container'
 import ThemeToggle from '../ui/ThemeToggle'
 
 function MobileMenu({ navigationItems, onClose, open, triggerRef }) {
+  const { pathname } = useLocation()
   const closeButtonRef = useRef(null)
   const wasOpenRef = useRef(false)
-  const { pathname } = useLocation()
+  const previousPathnameRef = useRef(pathname)
 
   useEffect(() => {
     if (!open) {
@@ -39,9 +40,10 @@ function MobileMenu({ navigationItems, onClose, open, triggerRef }) {
   }, [onClose, open, triggerRef])
 
   useEffect(() => {
-    if (open) {
+    if (open && previousPathnameRef.current !== pathname) {
       onClose(false)
     }
+    previousPathnameRef.current = pathname
   }, [open, pathname, onClose])
 
   if (!open) {
@@ -50,7 +52,7 @@ function MobileMenu({ navigationItems, onClose, open, triggerRef }) {
 
   return (
     <div
-      className="fixed inset-0 z-50 bg-[color:rgb(10_10_10_/_0.55)] md:hidden motion-safe:transition-opacity motion-safe:duration-200"
+      className="fixed inset-0 z-50 bg-[color:rgb(10_10_10_/_0.55)] lg:hidden motion-safe:transition-opacity motion-safe:duration-200"
       onClick={() => onClose()}
     >
       <div
@@ -78,30 +80,35 @@ function MobileMenu({ navigationItems, onClose, open, triggerRef }) {
               className="inline-flex h-11 w-11 items-center justify-center border border-[color:var(--border-strong)] bg-[color:var(--surface)] text-[color:var(--foreground)] transition-colors duration-200 ease-out hover:bg-[color:var(--surface-strong)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-blue)] focus-visible:ring-offset-2 focus-visible:ring-offset-[color:var(--background)]"
               aria-label="Закрыть меню"
             >
-              <span aria-hidden="true" className="text-lg leading-none">
-                ×
-              </span>
+              <X aria-hidden="true" size={20} strokeWidth={1.7} />
             </button>
           </div>
 
           <nav className="flex-1 py-6" aria-label="Мобильная навигация">
             <ul className="space-y-2">
-              {navigationItems.map(({ to, label, end }) => (
+              {navigationItems.map(({ to, label, end, isAnchor }) => (
                 <li key={to}>
-                  <NavLink
-                    to={to}
-                    end={end}
-                    className={({ isActive }) =>
-                      [
-                        'flex min-h-12 items-center border px-4 text-base transition-colors duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-blue)] focus-visible:ring-offset-2 focus-visible:ring-offset-[color:var(--background)]',
-                        isActive
-                          ? 'border-[color:var(--foreground)] bg-[color:var(--foreground)] text-[color:var(--background)]'
-                          : 'border-[color:var(--border)] bg-[color:var(--surface)] text-[color:var(--foreground)]',
-                      ].join(' ')
-                    }
-                  >
-                    {label}
-                  </NavLink>
+                  {isAnchor ? (
+                    <a href={to} onClick={() => onClose()} className="flex min-h-12 items-center border-b-2 border-transparent px-1 text-base text-[color:var(--muted-foreground)] transition-colors duration-200 ease-out hover:border-b-[color:var(--border-strong)] hover:text-[color:var(--foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-blue)] focus-visible:ring-offset-2 focus-visible:ring-offset-[color:var(--background)]">
+                      {label}
+                    </a>
+                  ) : (
+                    <NavLink
+                      to={to}
+                      end={end}
+                      onClick={() => onClose(false)}
+                      className={({ isActive }) =>
+                        [
+                          'flex min-h-12 items-center border-b-2 border-transparent px-1 text-base transition-colors duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-blue)] focus-visible:ring-offset-2 focus-visible:ring-offset-[color:var(--background)]',
+                          isActive
+                            ? 'border-b-[color:var(--accent-red)] text-[color:var(--foreground)]'
+                            : 'text-[color:var(--muted-foreground)] hover:border-b-[color:var(--border-strong)] hover:text-[color:var(--foreground)]',
+                        ].join(' ')
+                      }
+                    >
+                      {label}
+                    </NavLink>
+                  )}
                 </li>
               ))}
             </ul>
@@ -115,9 +122,6 @@ function MobileMenu({ navigationItems, onClose, open, triggerRef }) {
               <ThemeToggle />
             </div>
 
-            <Button href="mailto:Sambo-chechen@mail.ru" variant="secondary">
-              Контакты
-            </Button>
           </div>
         </Container>
       </div>

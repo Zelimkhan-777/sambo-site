@@ -1,9 +1,13 @@
 import Container from '../ui/Container'
+import { FileText } from 'lucide-react'
 
 function PageStub({ title, description, eyebrow }) {
   return (
     <Container>
       <section className="border border-[color:var(--border)] bg-[color:var(--surface)] px-6 py-8 sm:px-8 sm:py-10">
+        <div className="mb-8 flex h-16 w-16 items-center justify-center border border-[color:var(--border-strong)] bg-[color:var(--background)] text-[color:var(--accent-red)]">
+          <FileText aria-hidden="true" size={28} strokeWidth={1.4} />
+        </div>
         <p className="text-sm font-medium uppercase tracking-[0.24em] text-[color:var(--muted-foreground)]">
           {eyebrow}
         </p>
