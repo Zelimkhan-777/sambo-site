@@ -7,12 +7,10 @@ function Layout() {
   return (
     <>
       <ScrollToTop />
-      <div className="flex min-h-screen flex-col bg-white text-neutral-950">
+      <div className="flex min-h-screen flex-col bg-[color:var(--background)] text-[color:var(--foreground)] transition-colors duration-200 ease-out motion-reduce:transition-none">
         <Header />
-        <main className="flex-1">
-          <div className="mx-auto w-full max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
-            <Outlet />
-          </div>
+        <main className="flex-1 py-8 sm:py-10">
+          <Outlet />
         </main>
         <Footer />
       </div>

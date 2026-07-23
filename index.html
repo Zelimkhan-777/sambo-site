@@ -1,10 +1,33 @@
 <!doctype html>
-<html lang="en">
+<html lang="ru">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>sambo-site</title>
+    <meta
+      name="description"
+      content="Федерация самбо Чеченской Республики"
+    />
+    <title>Федерация самбо Чеченской Республики</title>
+    <script>
+      ;(() => {
+        const storageKey = 'sambo-theme'
+        const root = document.documentElement
+        const storedTheme = window.localStorage.getItem(storageKey)
+        const systemTheme = window.matchMedia('(prefers-color-scheme: dark)')
+          .matches
+          ? 'dark'
+          : 'light'
+        const theme =
+          storedTheme === 'light' || storedTheme === 'dark'
+            ? storedTheme
+            : systemTheme
+
+        root.dataset.theme = theme
+        root.classList.toggle('dark', theme === 'dark')
+        root.style.colorScheme = theme
+      })()
+    </script>
   </head>
   <body>
     <div id="root"></div>
