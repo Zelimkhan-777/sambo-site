@@ -1,14 +1,14 @@
 import { useEffect } from 'react'
-import Button from '../components/ui/Button'
 import Section from '../components/common/Section'
 import SectionHeading from '../components/common/SectionHeading'
 import MediaPlaceholder, { Users } from '../components/common/MediaPlaceholder'
-import { activityDirections, federationInfo, federationPreview } from '../data/federation'
+import { activityDirections, federationInfo } from '../data/federation'
 import { leadership } from '../data/coaches'
 import { activityMedia, leadershipMedia } from '../data/media'
 
 function AboutHero() {
-  return (
+  return null
+  /*
     <Section className="pt-2 sm:pt-4">
       <div className="grid gap-8 border border-[color:var(--border)] bg-[color:var(--surface)] p-6 sm:p-8 lg:grid-cols-[minmax(0,1.1fr)_minmax(280px,0.9fr)] lg:p-10">
         <div>
@@ -40,7 +40,7 @@ function AboutHero() {
         </div>
       </div>
     </Section>
-  )
+  */
 }
 
 function FederationFacts() {
