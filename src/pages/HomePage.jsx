@@ -174,10 +174,7 @@ function ChampionsPreview() {
               />
             )}
             <div>
-              <p className="text-xs uppercase tracking-[0.18em] text-[color:var(--accent-red)]">
-                Самбо
-              </p>
-              <h3 className="mt-3 text-xl font-semibold tracking-[-0.03em] text-[color:var(--foreground)]">
+              <h3 className="text-xl font-semibold tracking-[-0.03em] text-[color:var(--foreground)]">
                 {champion.name}
               </h3>
               <p className="mt-4 text-sm font-medium leading-7 text-[color:var(--foreground)]">
@@ -186,14 +183,6 @@ function ChampionsPreview() {
               <p className="mt-3 text-sm leading-7 text-[color:var(--muted-foreground)]">
                 {champion.distinction}
               </p>
-              <a
-                className="mt-5 inline-flex text-xs uppercase tracking-[0.16em] text-[color:var(--muted-foreground)] underline decoration-[color:var(--border-strong)] underline-offset-4 hover:text-[color:var(--foreground)]"
-                href={champion.sourceUrl}
-                rel="noreferrer"
-                target="_blank"
-              >
-                Источник
-              </a>
             </div>
           </article>
         ))}

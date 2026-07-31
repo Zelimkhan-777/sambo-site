@@ -1,19 +1,21 @@
-import heroImage from "../assets/images/optimized/hero/sambo-hero.jpg";
-import hasmagomedDikievImage from "../assets/images/optimized/champions-hasmagomed-dikiev.jpg";
+import hasmagomedDikievAltImage from "../assets/images/optimized/champions-hasmagomed-dikiev-alt.png";
 import adlanBisultanovImage from "../assets/images/optimized/champions-adlan-bisultanov.jpg";
-import magomedEmiSaidulkhanovImage from "../assets/images/optimized/champions-magomed-emi-saidulkhanov.jpg";
+import samboChampsImage from "../assets/images/optimized/samboChamps.webp";
 import sheikhMansurImage from "../assets/images/optimized/champions-sheikh-mansur.jpg";
 import rustamKagermanovImage from "../assets/images/optimized/leadership/rustam-kagermanov.jpg";
 import turpalAliIbragimovImage from "../assets/images/optimized/leadership/turpal-ali-ibragimov.jpg";
 import newsImage01 from "../assets/images/optimized/news/grozny-skfo-01.jpg";
 import newsImage02 from "../assets/images/optimized/news/grozny-skfo-02.jpg";
 import newsImage03 from "../assets/images/optimized/news/grozny-skfo-03.jpg";
+import activitySportImage from "../assets/images/optimized/activity/sport-sambo-2026.jpg";
+import activityCombatImage from "../assets/images/optimized/activity/combat-sambo-2025.jpg";
+import activityYouthImage from "../assets/images/optimized/activity/youth-sambo-2026.jpg";
+import activityReserveImage from "../assets/images/optimized/activity/reserve-sambo-2026.jpg";
+import activityEventsImage from "../assets/images/optimized/activity/events-sambo-2026.jpg";
+import activityJudgingImage from "../assets/images/optimized/activity/judging-sambo-2024.jpg";
 import sambokids from "../assets/images/optimized/hero/sambokids.jpg";
 import sambo01 from "../assets/images/optimized/hero/sambo01.jpg";
-import sambo02 from "../assets/images/optimized/hero/sambo02.jpg";
 import sambo03 from "../assets/images/optimized/hero/sambo03.jpg";
-import shaliTrainingImage from "../assets/images/optimized/hero/shali-training-01.jpg";
-import shaliCampOfficialImage from "../assets/images/optimized/hero/shali-camp-official.jpg";
 
 const samboArchiveUrl = "https://www.sambo.ru/photo/2026/4696/";
 const samboSourceName = "Фотоархив Всероссийской федерации самбо";
@@ -109,30 +111,40 @@ export const newsMedia = [
 
 export const activityMedia = {
   "sport-sambo": {
-    src: newsImage01,
-    alt: "Поединок спортсменов на соревнованиях по самбо в Грозном",
+    src: activitySportImage,
+    alt: "Команды участников соревнований по спортивному самбо",
+    sourceName: "Всероссийская федерация самбо",
+    sourceUrl: "https://www.sambo.ru/press/news/2026/12081/",
   },
   "combat-sambo": {
-    src: heroImage,
-    alt: "Спортсмены во время поединка по самбо",
+    src: activityCombatImage,
+    alt: "Спортсменки на чемпионате России по боевому самбо",
+    sourceName: "Всероссийская федерация самбо",
+    sourceUrl: "https://www.sambo.ru/photo/2025/4404/",
   },
   "youth-sport": {
-    src: shaliCampOfficialImage,
-    alt: "Юные самбисты на сборе в Шали",
+    src: activityYouthImage,
+    alt: "Юные спортсмены на командном турнире по боевому самбо",
     sourceName: "Всероссийская федерация самбо",
-    sourceUrl: "https://sambo.ru/press/news/2024/11003/",
+    sourceUrl: "https://www.sambo.ru/press/news/2026/12020/",
   },
   reserve: {
-    src: shaliTrainingImage,
+    src: activityReserveImage,
     alt: "Спортсмены на тренировочном сборе по самбо",
+    sourceName: "Всероссийская федерация самбо",
+    sourceUrl: "https://www.sambo.ru/press/news/2026/11944/",
   },
   events: {
-    src: newsImage02,
-    alt: "Участники соревнований по самбо в Грозном",
+    src: activityEventsImage,
+    alt: "Арена во время крупного соревнования по самбо",
+    sourceName: "Всероссийская федерация самбо",
+    sourceUrl: "https://www.sambo.ru/press/news/2026/12073/",
   },
   judging: {
-    src: newsImage03,
-    alt: "Церемония награждения на соревнованиях по самбо",
+    src: activityJudgingImage,
+    alt: "Судьи на семинаре по самбо",
+    sourceName: "Всероссийская федерация самбо",
+    sourceUrl: "https://sambo.ru/press/news/2024/10831/",
   },
 };
 
@@ -161,11 +173,11 @@ export const leadershipMedia = {
 
 export const championsMedia = {
   "dikiev-hasmagomed": {
-    src: hasmagomedDikievImage,
+    src: hasmagomedDikievAltImage,
     alt: "Хасмагомед Дикиев — чемпион мира по самбо",
     sourceName: "NewArgun, фото из биографического материала",
     sourceUrl:
-      "https://checheninfo.ru/291074-chechnja-dikiev-hasmagomed-magomedovich.html",
+      "https://checheninfo.ru/306447-chechnja-pervyj-chechenec-stavshij-chempionom-mira-po-sambo-hasmagomed-dikiev.html",
     category: "champions",
     usageStatus: "requires-approval",
     isVerified: true,
@@ -181,10 +193,11 @@ export const championsMedia = {
     isVerified: true,
   },
   "saidulkhanov-magomed-emi": {
-    src: magomedEmiSaidulkhanovImage,
+    src: samboChampsImage,
     alt: "Магомед-Эми Сайдулханов в форме самбо с медалью",
     sourceName: "Грозный-информ",
-    sourceUrl: "https://www.grozny-inform.ru/news/health/123353/",
+    sourceUrl:
+      "https://checheninfo.ru/265991-chechnja-magomed-jemi-sajdulhanov-stal-chempionom-mira-po-sambo.html",
     category: "champions",
     usageStatus: "requires-approval",
     isVerified: true,
