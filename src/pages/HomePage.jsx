@@ -7,6 +7,7 @@ import Section from "../components/common/Section";
 import SectionHeading from "../components/common/SectionHeading";
 import { federationInfo, federationPreview } from "../data/federation";
 import { champions } from "../data/champions";
+import { grantProjects } from "../data/grants";
 import { activityMedia, championsMedia, heroSlides } from "../data/media";
 import { news } from "../data/news";
 import { sortNewsByDate } from "../utils/news";
@@ -191,6 +192,47 @@ function ChampionsPreview() {
   );
 }
 
+function GrantsProjectsPreview() {
+  return (
+    <Section className="pt-16 sm:pt-20">
+      <SectionHeading
+        eyebrow="Поддержка и развитие"
+        title="Гранты и социальные проекты"
+        description="Развиваем самбо, поддерживаем молодёжь и создаём возможности для спортивного роста"
+      />
+
+      <div className="mt-8 grid gap-5 md:grid-cols-2">
+        {grantProjects.map((project) => (
+          <article
+            key={project.id}
+            className="flex h-full flex-col border border-[color:var(--border)] bg-[color:var(--surface)] p-5 sm:p-6"
+          >
+            <div className="flex min-h-40 items-center justify-center border border-[color:var(--border)] bg-white p-4 sm:min-h-44 dark:bg-white">
+              <img
+                src={project.logo}
+                alt={project.logoAlt}
+                className="max-h-32 w-auto max-w-full object-contain sm:max-h-36"
+                loading="lazy"
+              />
+            </div>
+            <p className="mt-5 text-[11px] font-semibold uppercase tracking-[0.16em] text-[color:var(--muted-foreground)]">
+              {project.organization}
+            </p>
+            <h3 className="mt-3 text-xl font-semibold leading-tight tracking-[-0.03em] text-[color:var(--foreground)]">
+              {project.title}
+            </h3>
+            <div className="mt-4 space-y-3 text-sm leading-7 text-[color:var(--muted-foreground)]">
+              {project.description.split('\n\n').map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
+            </div>
+          </article>
+        ))}
+      </div>
+    </Section>
+  )
+}
+
 function ContactCTA() {
   return (
     <Section className="py-16 sm:py-20">
@@ -254,6 +296,7 @@ function HomePage() {
       <AboutPreview />
       <LatestNews />
       <ChampionsPreview />
+      <GrantsProjectsPreview />
       <ContactCTA />
     </>
   );
