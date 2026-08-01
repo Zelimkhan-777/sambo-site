@@ -1,4 +1,6 @@
 import Button from "../components/ui/Button";
+import { useEffect, useState } from "react";
+import { getNews } from "../api/newsApi";
 import EmptyState from "../components/common/EmptyState";
 import HeroSlider from "../components/common/HeroSlider";
 import MediaPlaceholder from "../components/common/MediaPlaceholder";
@@ -9,8 +11,6 @@ import { federationInfo, federationPreview } from "../data/federation";
 import { champions } from "../data/champions";
 import { grantProjects } from "../data/grants";
 import { activityMedia, championsMedia, heroSlides } from "../data/media";
-import { news } from "../data/news";
-import { sortNewsByDate } from "../utils/news";
 import { Award, ShieldCheck, Trophy, UsersRound } from "lucide-react";
 
 function HeroSection() {
@@ -113,14 +113,32 @@ function AboutPreview() {
 }
 
 function LatestNews() {
-  const latestNews = sortNewsByDate(news).slice(0, 3);
+  const [latestNews, setLatestNews] = useState([]);
+  const [status, setStatus] = useState("loading");
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    async function loadLatestNews() {
+      try {
+        const items = await getNews({ limit: 3, signal: controller.signal });
+        setLatestNews(items);
+        setStatus("success");
+      } catch (error) {
+        if (error.name !== "AbortError") setStatus("error");
+      }
+    }
+
+    loadLatestNews();
+    return () => controller.abort();
+  }, []);
 
   return (
     <Section className="pt-16 sm:pt-20">
       <SectionHeading
         eyebrow="Новости"
         title="Последние материалы"
-        description="Секция подготовлена для публикации подтверждённых новостей федерации. Пока в ней отображаются временные демонстрационные записи с явной пометкой."
+        description="Последние официальные новости и материалы Федерации."
         action={
           <Button to="/news" variant="text">
             Все новости
@@ -128,19 +146,37 @@ function LatestNews() {
         }
       />
 
-      {latestNews.length ? (
+      {status === "loading" ? (
+        <EmptyState
+          className="mt-8"
+          title="Загружаем последние материалы"
+          description="Новости появятся через несколько секунд."
+        />
+      ) : null}
+
+      {status === "error" ? (
+        <EmptyState
+          className="mt-8"
+          title="Новости временно недоступны"
+          description="Не удалось получить последние материалы из системы публикации."
+        />
+      ) : null}
+
+      {status === "success" && latestNews.length ? (
         <div className="mt-8 grid gap-5 lg:grid-cols-3">
           {latestNews.map((item) => (
             <NewsCard key={item.id} item={item} />
           ))}
         </div>
-      ) : (
+      ) : null}
+
+      {status === "success" && !latestNews.length ? (
         <EmptyState
           className="mt-8"
           title="Материалы готовятся к публикации"
           description="После проверки и подготовки официальных публикаций в этом разделе появятся последние новости федерации."
         />
-      )}
+      ) : null}
     </Section>
   );
 }

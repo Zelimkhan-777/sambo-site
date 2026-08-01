@@ -4,8 +4,6 @@ import samboChampsImage from "../assets/images/optimized/samboChamps.webp";
 import sheikhMansurImage from "../assets/images/optimized/champions-sheikh-mansur.jpg";
 import rustamKagermanovImage from "../assets/images/raw/leadership/rustam-kagermanov-01.jpeg";
 import turpalAliIbragimovImage from "../assets/images/raw/leadership/turpal-ali-ibragimov.jpg";
-import newsImage01 from "../assets/images/optimized/news/grozny-skfo-01.jpg";
-import newsImage02 from "../assets/images/optimized/news/grozny-skfo-02.jpg";
 import newsImage03 from "../assets/images/optimized/news/grozny-skfo-03.jpg";
 import activitySportImage from "../assets/images/optimized/activity/sport-sambo-2026.jpg";
 import activityCombatImage from "../assets/images/optimized/activity/combat-sambo-2025.jpg";
@@ -71,39 +69,6 @@ export const heroSlides = [
     sourceName: regionalNewsSourceName,
     sourceUrl: regionalNewsUrl,
     category: "hero",
-    usageStatus: "requires-approval",
-    isVerified: true,
-  },
-];
-
-export const newsMedia = [
-  {
-    id: "sambo-news-01",
-    src: newsImage01,
-    alt: "Церемония награждения на соревнованиях по самбо",
-    sourceName: regionalNewsSourceName,
-    sourceUrl: regionalNewsUrl,
-    category: "news",
-    usageStatus: "requires-approval",
-    isVerified: true,
-  },
-  {
-    id: "sambo-news-02",
-    src: newsImage02,
-    alt: "Спортсмен во время соревнований по самбо",
-    sourceName: regionalNewsSourceName,
-    sourceUrl: regionalNewsUrl,
-    category: "news",
-    usageStatus: "requires-approval",
-    isVerified: true,
-  },
-  {
-    id: "sambo-news-03",
-    src: newsImage03,
-    alt: "Спортсмены во время поединка по самбо",
-    sourceName: regionalNewsSourceName,
-    sourceUrl: regionalNewsUrl,
-    category: "news",
     usageStatus: "requires-approval",
     isVerified: true,
   },

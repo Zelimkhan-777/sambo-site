@@ -39,12 +39,14 @@ function NewsCard({ item }) {
         )}
 
         <div className="flex flex-1 flex-col px-5 py-5">
-          <time
-            className="text-[11px] uppercase tracking-[0.16em] text-[color:var(--muted-foreground)]"
-            dateTime={item.publishedAt}
-          >
-            {formatNewsDate(item.publishedAt)}
-          </time>
+          {item.publishedAt ? (
+            <time
+              className="text-[11px] uppercase tracking-[0.16em] text-[color:var(--muted-foreground)]"
+              dateTime={item.publishedAt}
+            >
+              {formatNewsDate(item.publishedAt)}
+            </time>
+          ) : null}
 
           <h3 className="mt-4 text-xl font-semibold tracking-[-0.03em] text-[color:var(--foreground)] transition-colors duration-200 group-hover:text-[color:var(--accent-blue)]">
             {item.title}

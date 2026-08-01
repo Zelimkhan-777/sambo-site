@@ -1,14 +1,15 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import { getNews, getNewsBySlug } from '../api/newsApi'
 import Breadcrumbs from '../components/common/Breadcrumbs'
+import EmptyState from '../components/common/EmptyState'
 import MediaPlaceholder from '../components/common/MediaPlaceholder'
 import NewsCard from '../components/common/NewsCard'
 import Section from '../components/common/Section'
 import SectionHeading from '../components/common/SectionHeading'
 import Button from '../components/ui/Button'
-import { news } from '../data/news'
+import { formatNewsDate } from '../utils/news'
 import NotFoundPage from './NotFoundPage'
-import { formatNewsDate, sortNewsByDate } from '../utils/news'
 
 function NewsCover({ item }) {
   if (item.coverImage) {
@@ -22,22 +23,54 @@ function NewsCover({ item }) {
   }
 
   return (
-    <MediaPlaceholder className="aspect-[16/8] min-h-56" label="Фотография готовится к публикации" />
+    <MediaPlaceholder
+      className="aspect-[16/8] min-h-56"
+      label="Фотография готовится к публикации"
+    />
   )
 }
 
 function NewsDetailsPage() {
   const { slug } = useParams()
-  const [shareStatus, setShareStatus] = useState('')
-  const item = news.find((newsItem) => newsItem.slug === slug)
+  const [item, setItem] = useState(null)
+  const [otherNews, setOtherNews] = useState([])
+  const [status, setStatus] = useState('loading')
+  const [shareStatus, setShareStatus] = useState({ slug: null, message: '' })
 
-  if (!item) {
-    return <NotFoundPage />
-  }
+  useEffect(() => {
+    const controller = new AbortController()
 
-  const otherNews = sortNewsByDate(news)
-    .filter((newsItem) => newsItem.slug !== item.slug)
-    .slice(0, 3)
+    async function loadNewsItem() {
+      try {
+        const newsItem = await getNewsBySlug(slug, {
+          signal: controller.signal,
+        })
+
+        if (!newsItem) {
+          setStatus('not-found')
+          return
+        }
+
+        setItem(newsItem)
+        setStatus('success')
+
+        try {
+          const items = await getNews({ limit: 4, signal: controller.signal })
+          setOtherNews(
+            items.filter((otherItem) => otherItem.slug !== newsItem.slug).slice(0, 3),
+          )
+        } catch (error) {
+          if (error.name === 'AbortError') throw error
+          setOtherNews([])
+        }
+      } catch (error) {
+        if (error.name !== 'AbortError') setStatus('error')
+      }
+    }
+
+    loadNewsItem()
+    return () => controller.abort()
+  }, [slug])
 
   async function handleShare() {
     const shareData = { title: item.title, url: window.location.href }
@@ -45,14 +78,40 @@ function NewsDetailsPage() {
     try {
       if (navigator.share) {
         await navigator.share(shareData)
-        setShareStatus('Ссылка отправлена')
+        setShareStatus({ slug, message: 'Ссылка отправлена' })
       } else {
         await navigator.clipboard.writeText(window.location.href)
-        setShareStatus('Ссылка скопирована')
+        setShareStatus({ slug, message: 'Ссылка скопирована' })
       }
     } catch {
-      setShareStatus('Не удалось поделиться ссылкой')
+      setShareStatus({ slug, message: 'Не удалось поделиться ссылкой' })
     }
+  }
+
+  const pageStatus = status === 'success' && item?.slug !== slug ? 'loading' : status
+
+  if (pageStatus === 'not-found') return <NotFoundPage />
+
+  if (pageStatus === 'loading') {
+    return (
+      <Section className="pt-2 sm:pt-4">
+        <EmptyState
+          title="Загружаем материал"
+          description="Полная версия новости появится через несколько секунд."
+        />
+      </Section>
+    )
+  }
+
+  if (pageStatus === 'error') {
+    return (
+      <Section className="pt-2 sm:pt-4">
+        <EmptyState
+          title="Материал временно недоступен"
+          description="Не удалось получить новость из системы публикации. Попробуйте обновить страницу позже."
+        />
+      </Section>
+    )
   }
 
   return (
@@ -67,27 +126,40 @@ function NewsDetailsPage() {
         />
 
         <article className="mx-auto mt-8 max-w-4xl">
-          <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-[11px] uppercase tracking-[0.18em] text-[color:var(--muted-foreground)]">
-            <span>{item.category}</span>
-            <span aria-hidden="true" className="h-1 w-1 rounded-full bg-[color:var(--border-strong)]" />
-            <time dateTime={item.publishedAt}>{formatNewsDate(item.publishedAt)}</time>
-          </div>
+          {item.publishedAt ? (
+            <time
+              className="text-[11px] uppercase tracking-[0.18em] text-[color:var(--muted-foreground)]"
+              dateTime={item.publishedAt}
+            >
+              {formatNewsDate(item.publishedAt)}
+            </time>
+          ) : null}
           <h1 className="mt-5 max-w-4xl text-4xl font-semibold tracking-[-0.05em] text-[color:var(--foreground)] sm:text-5xl sm:leading-[1.05]">
             {item.title}
           </h1>
-          <p className="mt-5 max-w-3xl text-base leading-8 text-[color:var(--muted-foreground)] sm:text-lg">
-            {item.shortDescription}
-          </p>
+          {item.shortDescription ? (
+            <p className="mt-5 max-w-3xl text-base leading-8 text-[color:var(--muted-foreground)] sm:text-lg">
+              {item.shortDescription}
+            </p>
+          ) : null}
 
           <div className="mt-8">
             <NewsCover item={item} />
           </div>
 
-          <div className="mt-8 max-w-3xl space-y-5 text-base leading-8 text-[color:var(--foreground)]">
-            {item.content.map((paragraph) => (
-              <p key={paragraph}>{paragraph}</p>
-            ))}
-          </div>
+          {item.content.length ? (
+            <div className="mt-8 max-w-3xl space-y-5 text-base leading-8 text-[color:var(--foreground)]">
+              {item.content.map((paragraph, index) => (
+                <p key={`${item.id}-${index}`}>{paragraph}</p>
+              ))}
+            </div>
+          ) : (
+            <EmptyState
+              className="mt-8"
+              title="Полный текст готовится"
+              description="Материал будет дополнен в системе публикации."
+            />
+          )}
 
           <div className="mt-8 flex flex-col gap-3 border-t border-[color:var(--border)] pt-6 sm:flex-row sm:items-center">
             <Button to="/news" variant="secondary">
@@ -96,7 +168,14 @@ function NewsDetailsPage() {
             <Button onClick={handleShare} variant="text">
               Поделиться ссылкой
             </Button>
-            {shareStatus ? <span className="text-sm text-[color:var(--muted-foreground)]" role="status">{shareStatus}</span> : null}
+            {shareStatus.slug === slug && shareStatus.message ? (
+              <span
+                className="text-sm text-[color:var(--muted-foreground)]"
+                role="status"
+              >
+                {shareStatus.message}
+              </span>
+            ) : null}
           </div>
         </article>
       </Section>

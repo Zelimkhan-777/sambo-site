@@ -5,6 +5,7 @@ import CoachesPage from '../pages/CoachesPage'
 import DocumentsPage from '../pages/DocumentsPage'
 import GrantsPage from '../pages/GrantsPage'
 import HomePage from '../pages/HomePage'
+import MediaPage from '../pages/MediaPage'
 import NewsDetailsPage from '../pages/NewsDetailsPage'
 import NewsPage from '../pages/NewsPage'
 import NotFoundPage from '../pages/NotFoundPage'
@@ -20,6 +21,7 @@ export const router = createBrowserRouter([
       { path: 'grants', element: <GrantsPage /> },
       { path: 'news', element: <NewsPage /> },
       { path: 'news/:slug', element: <NewsDetailsPage /> },
+      { path: 'media', element: <MediaPage /> },
       { path: 'coaches', element: <CoachesPage /> },
       { path: '*', element: <NotFoundPage /> },
     ],
