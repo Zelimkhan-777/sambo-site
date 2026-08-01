@@ -194,7 +194,7 @@ function ChampionsPreview() {
 
 function GrantsProjectsPreview() {
   return (
-    <Section className="pt-16 sm:pt-20">
+    <Section id="grants" className="scroll-mt-28 pt-16 sm:pt-20">
       <SectionHeading
         eyebrow="Поддержка и развитие"
         title="Гранты и социальные проекты"
