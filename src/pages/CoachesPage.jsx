@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import MediaPlaceholder, { Users } from '../components/common/MediaPlaceholder';
 import Section from '../components/common/Section';
 import SectionHeading from '../components/common/SectionHeading';
@@ -43,10 +42,6 @@ function CoachCard({ coach }) {
 }
 
 function CoachesPage() {
-  useEffect(() => {
-    document.title = 'Тренеры | Федерация самбо Чеченской Республики';
-  }, []);
-
   return (
     <>
       <Section className="pt-2 sm:pt-4">

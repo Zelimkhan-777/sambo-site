@@ -36,6 +36,7 @@ function DocumentsPage() {
   return (
     <Section className="pt-2 sm:pt-4">
       <SectionHeading
+        as="h1"
         eyebrow="Официальные материалы"
         title="Документы"
         description="Положения, регламенты и другие официальные документы Федерации."

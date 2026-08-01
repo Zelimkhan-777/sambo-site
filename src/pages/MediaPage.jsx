@@ -71,6 +71,7 @@ function MediaPage() {
   return (
     <Section className="pt-2 sm:pt-4">
       <SectionHeading
+        as="h1"
         eyebrow="Видео Федерации"
         title="Медиа"
         description="Видеоматериалы о тренировках, соревнованиях и работе Федерации."

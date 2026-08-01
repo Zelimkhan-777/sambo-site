@@ -6,6 +6,8 @@ import EmptyState from '../components/common/EmptyState'
 import Section from '../components/common/Section'
 import Button from '../components/ui/Button'
 import NotFoundPage from './NotFoundPage'
+import Seo from '../components/common/Seo'
+import { getCanonicalUrl, SITE_NAME } from '../utils/seo'
 
 function MediaDetailsPage() {
   const { slug } = useParams()
@@ -61,16 +63,36 @@ function MediaDetailsPage() {
   const item = result.item
 
   return (
-    <Section className="pt-2 sm:pt-4">
-      <Breadcrumbs
-        items={[
-          { label: 'Главная', to: '/' },
-          { label: 'Медиа', to: '/media' },
-          { label: item.title },
-        ]}
+    <>
+      <Seo
+        title={`${item.title} | ${SITE_NAME}`}
+        description={item.description[0] || `Видеоматериал Федерации самбо Чеченской Республики: ${item.title}.`}
+        path={`/media/${item.slug}`}
+        type="video.other"
+        structuredData={{
+          '@context': 'https://schema.org',
+          '@type': 'VideoObject',
+          name: item.title,
+          description: item.description[0] || item.title,
+          contentUrl: item.videoUrl || undefined,
+          mainEntityOfPage: getCanonicalUrl(`/media/${item.slug}`),
+          publisher: {
+            '@type': 'Organization',
+            '@id': `${getCanonicalUrl('/')}#organization`,
+            name: SITE_NAME,
+          },
+        }}
       />
+      <Section className="pt-2 sm:pt-4">
+        <Breadcrumbs
+          items={[
+            { label: 'Главная', to: '/' },
+            { label: 'Медиа', to: '/media' },
+            { label: item.title },
+          ]}
+        />
 
-      <article className="mx-auto mt-8 max-w-4xl">
+        <article className="mx-auto mt-8 max-w-4xl">
         <h1 className="text-3xl font-semibold tracking-[-0.04em] text-[color:var(--foreground)] sm:text-4xl sm:leading-[1.1]">
           {item.title}
         </h1>
@@ -107,8 +129,9 @@ function MediaDetailsPage() {
             Все видеоматериалы
           </Button>
         </div>
-      </article>
-    </Section>
+        </article>
+      </Section>
+    </>
   )
 }
 

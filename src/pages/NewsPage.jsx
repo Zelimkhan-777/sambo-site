@@ -71,6 +71,7 @@ function NewsPage() {
   return (
     <Section className="pt-2 sm:pt-4">
       <SectionHeading
+        as="h1"
         eyebrow="Новости федерации"
         title="Новости"
         description="Публикации, официальные материалы и обновления раздела. Новые записи добавляются из единого источника данных после проверки содержания."

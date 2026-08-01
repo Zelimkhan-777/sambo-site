@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import Section from "../components/common/Section";
 import SectionHeading from "../components/common/SectionHeading";
 import MediaPlaceholder, { Users } from "../components/common/MediaPlaceholder";
@@ -53,6 +52,7 @@ function FederationFacts() {
   return (
     <Section className="pt-16 sm:pt-20">
       <SectionHeading
+        as="h1"
         eyebrow="Основные сведения"
         title="Федерация самбо Чеченской Республики"
         description="Региональная физкультурно-спортивная общественная организация, развивающая спортивное и боевое самбо в регионе."
@@ -199,10 +199,6 @@ function ContactsSection() {
 }
 
 function AboutPage() {
-  useEffect(() => {
-    document.title = "О Федерации | Федерация самбо Чеченской Республики";
-  }, []);
-
   return (
     <>
       <AboutHero />

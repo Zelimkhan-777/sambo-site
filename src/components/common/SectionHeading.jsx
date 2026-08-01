@@ -1,4 +1,6 @@
-function SectionHeading({ eyebrow, title, description, action }) {
+function SectionHeading({ eyebrow, title, description, action, as = 'h2' }) {
+  const Heading = as
+
   return (
     <div className="flex flex-col gap-5 border-b border-[color:var(--border)] pb-6 sm:flex-row sm:items-end sm:justify-between">
       <div className="max-w-3xl">
@@ -7,9 +9,9 @@ function SectionHeading({ eyebrow, title, description, action }) {
             {eyebrow}
           </p>
         ) : null}
-        <h2 className="mt-3 text-2xl font-semibold tracking-[-0.03em] text-[color:var(--foreground)] sm:text-3xl">
+        <Heading className="mt-3 text-2xl font-semibold tracking-[-0.03em] text-[color:var(--foreground)] sm:text-3xl">
           {title}
-        </h2>
+        </Heading>
         {description ? (
           <p className="mt-3 max-w-2xl text-sm leading-7 text-[color:var(--muted-foreground)]">
             {description}

@@ -10,6 +10,8 @@ import SectionHeading from '../components/common/SectionHeading'
 import Button from '../components/ui/Button'
 import { formatNewsDate } from '../utils/news'
 import NotFoundPage from './NotFoundPage'
+import Seo from '../components/common/Seo'
+import { getCanonicalUrl, SITE_NAME } from '../utils/seo'
 
 function NewsCover({ item }) {
   if (item.coverImage) {
@@ -116,6 +118,33 @@ function NewsDetailsPage() {
 
   return (
     <>
+      <Seo
+        title={`${item.title} | ${SITE_NAME}`}
+        description={item.shortDescription || `Новость Федерации самбо Чеченской Республики: ${item.title}.`}
+        image={item.coverImage}
+        path={`/news/${item.slug}`}
+        publishedAt={item.publishedAt}
+        type="article"
+        structuredData={{
+          '@context': 'https://schema.org',
+          '@type': 'NewsArticle',
+          headline: item.title,
+          description: item.shortDescription || undefined,
+          image: item.coverImage || undefined,
+          datePublished: item.publishedAt || undefined,
+          dateModified: item.publishedAt || undefined,
+          mainEntityOfPage: getCanonicalUrl(`/news/${item.slug}`),
+          author: {
+            '@type': 'Organization',
+            name: SITE_NAME,
+          },
+          publisher: {
+            '@type': 'Organization',
+            '@id': `${getCanonicalUrl('/')}#organization`,
+            name: SITE_NAME,
+          },
+        }}
+      />
       <Section className="pt-2 sm:pt-4">
         <Breadcrumbs
           items={[
