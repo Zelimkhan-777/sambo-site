@@ -4,7 +4,7 @@ const listFields = [
   'id',
   'slug',
   'title',
-  'date',
+  'date_created',
   'short_description',
   'cover_image.id',
   'cover_image.title',
@@ -34,7 +34,7 @@ function normalizeNewsItem(item, { includeContent = false } = {}) {
     coverImage: getAssetUrl(item.cover_image),
     imageAlt:
       item.cover_image?.description || item.cover_image?.title || item.title,
-    publishedAt: item.date,
+    publishedAt: item.date_created,
     shortDescription: item.short_description || '',
   }
 
@@ -51,12 +51,41 @@ export async function getNews({ limit, signal } = {}) {
     query: {
       fields: listFields,
       'filter[status][_eq]': 'published',
-      sort: '-date',
+      sort: '-date_created',
       limit,
     },
   })
 
   return Array.isArray(items) ? items.map((item) => normalizeNewsItem(item)) : []
+}
+
+export async function getNewsPage({ page = 1, limit = 6, signal } = {}) {
+  const publishedFilter = { 'filter[status][_eq]': 'published' }
+
+  const [items, aggregate] = await Promise.all([
+    apiRequest('/items/news', {
+      signal,
+      query: {
+        fields: listFields,
+        ...publishedFilter,
+        sort: '-date_created',
+        page,
+        limit,
+      },
+    }),
+    apiRequest('/items/news', {
+      signal,
+      query: {
+        'aggregate[count]': 'id',
+        ...publishedFilter,
+      },
+    }),
+  ])
+
+  return {
+    items: Array.isArray(items) ? items.map((item) => normalizeNewsItem(item)) : [],
+    total: Number(aggregate?.[0]?.count?.id) || 0,
+  }
 }
 
 export async function getNewsBySlug(slug, { signal } = {}) {

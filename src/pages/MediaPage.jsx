@@ -1,30 +1,72 @@
+import { motion, useReducedMotion } from 'framer-motion'
 import { useEffect, useState } from 'react'
-import { getMedia } from '../api/mediaApi'
+import { useSearchParams } from 'react-router-dom'
+import { getMediaPage } from '../api/mediaApi'
 import EmptyState from '../components/common/EmptyState'
+import MediaCard from '../components/common/MediaCard'
+import Pagination from '../components/common/Pagination'
 import Section from '../components/common/Section'
 import SectionHeading from '../components/common/SectionHeading'
-import { formatNewsDate } from '../utils/news'
+
+const PAGE_SIZE = 6
 
 function MediaPage() {
-  const [media, setMedia] = useState([])
-  const [status, setStatus] = useState('loading')
+  const shouldReduceMotion = useReducedMotion()
+  const [searchParams, setSearchParams] = useSearchParams()
+  const pageParam = Number.parseInt(searchParams.get('page') || '1', 10)
+  const currentPage = Number.isInteger(pageParam) && pageParam > 0 ? pageParam : 1
+  const [result, setResult] = useState({
+    page: 1,
+    media: [],
+    status: 'loading',
+    total: 0,
+  })
+
+  const status = result.page === currentPage ? result.status : 'loading'
+  const media = status === 'success' ? result.media : []
+  const totalPages = Math.max(1, Math.ceil(result.total / PAGE_SIZE))
 
   useEffect(() => {
     const controller = new AbortController()
 
     async function loadMedia() {
       try {
-        const items = await getMedia({ signal: controller.signal })
-        setMedia(items)
-        setStatus('success')
+        const response = await getMediaPage({
+          page: currentPage,
+          limit: PAGE_SIZE,
+          signal: controller.signal,
+        })
+        const availablePages = Math.max(1, Math.ceil(response.total / PAGE_SIZE))
+
+        if (currentPage > availablePages) {
+          setSearchParams(
+            availablePages === 1 ? {} : { page: String(availablePages) },
+            { replace: true },
+          )
+          return
+        }
+
+        setResult({
+          page: currentPage,
+          media: response.items,
+          status: 'success',
+          total: response.total,
+        })
       } catch (error) {
-        if (error.name !== 'AbortError') setStatus('error')
+        if (error.name !== 'AbortError') {
+          setResult({ page: currentPage, media: [], status: 'error', total: 0 })
+        }
       }
     }
 
     loadMedia()
     return () => controller.abort()
-  }, [])
+  }, [currentPage, setSearchParams])
+
+  function handlePageChange(page) {
+    if (page === currentPage) return
+    setSearchParams(page === 1 ? {} : { page: String(page) })
+  }
 
   return (
     <Section className="pt-2 sm:pt-4">
@@ -51,44 +93,17 @@ function MediaPage() {
       ) : null}
 
       {status === 'success' && media.length ? (
-        <div className="mt-8 grid gap-6 md:grid-cols-2">
+        <motion.div
+          key={currentPage}
+          className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
+          initial={shouldReduceMotion ? false : { opacity: 0, y: 12 }}
+          animate={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
+          transition={{ duration: 0.35, ease: 'easeOut' }}
+        >
           {media.map((item) => (
-            <article
-              key={item.id}
-              className="border border-[color:var(--border)] bg-[color:var(--surface)]"
-            >
-              {item.videoUrl ? (
-                <video
-                  aria-label={item.title}
-                  className="aspect-video w-full bg-neutral-950 object-contain"
-                  controls
-                  preload="metadata"
-                  src={item.videoUrl}
-                >
-                  Ваш браузер не поддерживает воспроизведение видео.
-                </video>
-              ) : (
-                <div className="flex aspect-video items-center justify-center border-b border-[color:var(--border)] bg-[color:var(--surface-strong)] px-5 text-center text-sm text-[color:var(--muted-foreground)]">
-                  Видео будет добавлено
-                </div>
-              )}
-
-              <div className="p-5">
-                {item.publishedAt ? (
-                  <time
-                    className="text-[11px] uppercase tracking-[0.16em] text-[color:var(--muted-foreground)]"
-                    dateTime={item.publishedAt}
-                  >
-                    {formatNewsDate(item.publishedAt)}
-                  </time>
-                ) : null}
-                <h2 className="mt-3 text-xl font-semibold tracking-[-0.03em] text-[color:var(--foreground)]">
-                  {item.title}
-                </h2>
-              </div>
-            </article>
+            <MediaCard key={item.id} item={item} />
           ))}
-        </div>
+        </motion.div>
       ) : null}
 
       {status === 'success' && !media.length ? (
@@ -96,6 +111,15 @@ function MediaPage() {
           className="mt-8"
           title="Видеоматериалы пока не опубликованы"
           description="Новые видео появятся здесь после публикации."
+        />
+      ) : null}
+
+      {status === 'success' && media.length ? (
+        <Pagination
+          ariaLabel="Навигация по страницам видеоматериалов"
+          currentPage={currentPage}
+          onPageChange={handlePageChange}
+          totalPages={totalPages}
         />
       ) : null}
     </Section>

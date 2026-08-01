@@ -17,7 +17,7 @@ function NewsCard({ item }) {
         className="flex h-full flex-col focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-blue)] focus-visible:ring-offset-2 focus-visible:ring-offset-[color:var(--background)]"
       >
         {item.coverImage ? (
-          <div className="relative aspect-[16/10] border-b border-[color:var(--border)] bg-[color:var(--surface-strong)]">
+          <div className="relative aspect-[16/10] shrink-0 overflow-hidden border-b border-[color:var(--border)] bg-[color:var(--surface-strong)]">
             <img
               alt={item.imageAlt || item.title}
               className="h-full w-full object-cover"
@@ -48,11 +48,14 @@ function NewsCard({ item }) {
             </time>
           ) : null}
 
-          <h3 className="mt-4 text-xl font-semibold tracking-[-0.03em] text-[color:var(--foreground)] transition-colors duration-200 group-hover:text-[color:var(--accent-blue)]">
+          <h3
+            className="mt-4 line-clamp-2 h-14 overflow-hidden text-xl font-semibold leading-7 tracking-[-0.03em] text-[color:var(--foreground)] transition-colors duration-200 group-hover:text-[color:var(--accent-blue)]"
+            title={item.title}
+          >
             {item.title}
           </h3>
 
-          <p className="mt-3 flex-1 text-sm leading-7 text-[color:var(--muted-foreground)]">
+          <p className="mt-3 line-clamp-3 h-[5.25rem] overflow-hidden text-sm leading-7 text-[color:var(--muted-foreground)]">
             {item.shortDescription}
           </p>
         </div>
