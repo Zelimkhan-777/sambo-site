@@ -26,7 +26,12 @@ function Header() {
       <header className="sticky top-0 z-40 border-b border-[color:var(--border)] bg-[color:var(--background)]">
         <Container className="py-4">
           <div className="flex items-center justify-between gap-4">
-            <div className="min-w-0 flex items-center gap-3">
+            <NavLink
+              to="/"
+              end
+              aria-label="На главную — Федерация самбо Чеченской Республики"
+              className="min-w-0 flex items-center gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-blue)] focus-visible:ring-offset-2 focus-visible:ring-offset-[color:var(--background)]"
+            >
               <div className="flex h-11 w-14 shrink-0 items-center justify-center">
                 <img
                   src={logo}
@@ -42,7 +47,7 @@ function Header() {
                   Чеченской Республики
                 </p>
               </div>
-            </div>
+            </NavLink>
 
             <div className="hidden items-center gap-3 lg:flex">
               <nav aria-label="Основная навигация">
