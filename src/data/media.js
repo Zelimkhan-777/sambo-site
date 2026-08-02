@@ -38,11 +38,6 @@ export const heroMedia = {
 
 export const heroSlides = [
   {
-    ...heroMedia,
-    caption: "Подготовка молодых спортсменов",
-  },
-
-  {
     id: "sambo03",
     src: sambo03,
     srcSet: `${sambo03Small} 640w, ${sambo03} 1280w`,
@@ -53,6 +48,11 @@ export const heroSlides = [
     category: "hero",
     usageStatus: "requires-approval",
     isVerified: true,
+  },
+
+  {
+    ...heroMedia,
+    caption: "Подготовка молодых спортсменов",
   },
 
   {

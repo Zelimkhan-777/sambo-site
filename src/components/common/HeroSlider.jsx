@@ -17,14 +17,6 @@ function HeroSlider({ slides, children }) {
     return () => window.clearInterval(timer)
   }, [isPaused, shouldReduceMotion, slides.length])
 
-  const goToPrevious = () => {
-    setActiveIndex((currentIndex) => (currentIndex - 1 + slides.length) % slides.length)
-  }
-
-  const goToNext = () => {
-    setActiveIndex((currentIndex) => (currentIndex + 1) % slides.length)
-  }
-
   if (!activeSlide) return null
 
   return (
@@ -59,34 +51,15 @@ function HeroSlider({ slides, children }) {
 
       <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/55 to-black/10" />
       <div className="relative flex min-h-[540px] flex-col justify-between p-6 text-white sm:p-10 lg:p-14">
-        <div className="flex items-center justify-between gap-4 text-[11px] uppercase tracking-[0.2em] text-white/75">
+        <div className="text-[11px] uppercase tracking-[0.2em] text-white/75">
           <span>Федерация самбо Чеченской Республики</span>
-          <span aria-live="polite">{String(activeIndex + 1).padStart(2, '0')} / {String(slides.length).padStart(2, '0')}</span>
         </div>
 
         {children}
 
-        <div className="flex items-center justify-between gap-5 pt-8">
-          <p className="max-w-md text-xs uppercase tracking-[0.16em] text-white/70">{activeSlide.caption}</p>
-          <div className="flex items-center gap-2">
-            <button
-              type="button"
-              className="flex h-10 w-10 items-center justify-center border border-white/45 text-lg text-white transition-colors hover:border-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
-              aria-label="Предыдущая фотография"
-              onClick={goToPrevious}
-            >
-              ←
-            </button>
-            <button
-              type="button"
-              className="flex h-10 w-10 items-center justify-center border border-white/45 text-lg text-white transition-colors hover:border-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
-              aria-label="Следующая фотография"
-              onClick={goToNext}
-            >
-              →
-            </button>
-          </div>
-        </div>
+        <p className="max-w-md pt-8 text-xs uppercase tracking-[0.16em] text-white/70">
+          {activeSlide.caption}
+        </p>
 
         <div className="absolute bottom-5 left-6 flex gap-2 sm:left-10 lg:left-14" role="tablist" aria-label="Выбор фотографии">
           {slides.map((slide, index) => (
