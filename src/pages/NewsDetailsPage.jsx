@@ -27,7 +27,7 @@ function NewsCover({ item }) {
   return (
     <MediaPlaceholder
       className="aspect-[16/8] min-h-56"
-      label="Фотография готовится к публикации"
+      label="Фотография не опубликована"
     />
   )
 }
@@ -99,7 +99,7 @@ function NewsDetailsPage() {
       <Section className="pt-2 sm:pt-4">
         <EmptyState
           title="Загружаем материал"
-          description="Полная версия новости появится через несколько секунд."
+          description="Пожалуйста, подождите немного."
         />
       </Section>
     )
@@ -110,7 +110,7 @@ function NewsDetailsPage() {
       <Section className="pt-2 sm:pt-4">
         <EmptyState
           title="Материал временно недоступен"
-          description="Не удалось получить новость из системы публикации. Попробуйте обновить страницу позже."
+          description="Не удалось загрузить новость. Попробуйте обновить страницу позже."
         />
       </Section>
     )
@@ -185,8 +185,8 @@ function NewsDetailsPage() {
           ) : (
             <EmptyState
               className="mt-8"
-              title="Полный текст готовится"
-              description="Материал будет дополнен в системе публикации."
+              title="Полный текст не опубликован"
+              description="Сейчас доступно только краткое описание новости."
             />
           )}
 

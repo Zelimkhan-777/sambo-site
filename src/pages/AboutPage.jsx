@@ -33,7 +33,7 @@ function AboutHero() {
           <div>
             <div className="h-px w-16 bg-[color:var(--accent-blue)]" />
             <p className="mt-4 text-sm leading-7 text-[color:var(--muted-foreground)]">
-              Информация на странице основана на подтверждённых данных источника федерации.
+              Официальные сведения о Федерации и её работе в регионе.
             </p>
           </div>
         </div>
@@ -55,18 +55,18 @@ function FederationFacts() {
         as="h1"
         eyebrow="Основные сведения"
         title="Федерация самбо Чеченской Республики"
-        description="Региональная физкультурно-спортивная общественная организация, развивающая спортивное и боевое самбо в регионе."
+        description="Региональная общественная организация по развитию спортивного и боевого самбо в Чеченской Республике."
       />
-      <dl className="mt-8 grid gap-4 lg:grid-cols-3">
+      <dl className="mt-10 border-y border-[color:var(--border-strong)]">
         {facts.map((fact) => (
           <div
             key={fact.label}
-            className="border border-[color:var(--border)] bg-[color:var(--surface)] p-5"
+            className="grid gap-2 border-b border-[color:var(--border)] py-5 last:border-b-0 sm:grid-cols-[12rem_minmax(0,1fr)] sm:gap-8"
           >
-            <dt className="text-[11px] uppercase tracking-[0.18em] text-[color:var(--muted-foreground)]">
+            <dt className="text-sm font-medium text-[color:var(--muted-foreground)]">
               {fact.label}
             </dt>
-            <dd className="mt-4 text-sm leading-7 text-[color:var(--foreground)]">
+            <dd className="text-sm leading-7 text-[color:var(--foreground)]">
               {fact.value}
             </dd>
           </div>
@@ -82,7 +82,7 @@ function ActivitySection() {
       <SectionHeading
         eyebrow="Цели и задачи"
         title="Основные направления работы"
-        description="На странице представлены направления, заявленные в материалах проекта, без неподтверждённых показателей и достижений."
+        description="Подготовка спортсменов, развитие спортивного резерва и организация профильных мероприятий в регионе."
       />
       <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
         {activityDirections.map((direction) => (
@@ -120,7 +120,7 @@ function LeadershipSection() {
       <SectionHeading
         eyebrow="Руководство"
         title="Представители федерации"
-        description="Фамилии и должности приведены по подтверждённому источнику. Биографии и достижения будут добавлены только после отдельной проверки."
+        description="Руководители, отвечающие за организационную работу и развитие Федерации."
       />
       <div className="mt-8 grid gap-4 md:grid-cols-2">
         {leadership.map((person) => (
@@ -141,7 +141,7 @@ function LeadershipSection() {
                 <MediaPlaceholder
                   compact
                   icon={Users}
-                  label="Фотография представителя готовится"
+                  label="Фотография не опубликована"
                 />
               ) : null}
               <div>
@@ -163,7 +163,7 @@ function LeadershipSection() {
 function ContactsSection() {
   return (
     <Section className="py-16 sm:py-20">
-      <div className="border border-[color:var(--border)] bg-[color:var(--surface)] p-6 sm:p-8 lg:p-10">
+      <div className="border-t-2 border-[color:var(--foreground)] bg-[color:var(--surface)] p-6 sm:p-8 lg:p-10">
         <SectionHeading
           eyebrow="Контакты"
           title="Связаться с федерацией"

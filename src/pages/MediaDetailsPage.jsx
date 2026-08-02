@@ -43,7 +43,7 @@ function MediaDetailsPage() {
       <Section className="pt-2 sm:pt-4">
         <EmptyState
           title="Загружаем видеоматериал"
-          description="Материал появится через несколько секунд."
+          description="Пожалуйста, подождите немного."
         />
       </Section>
     )
@@ -54,7 +54,7 @@ function MediaDetailsPage() {
       <Section className="pt-2 sm:pt-4">
         <EmptyState
           title="Видеоматериал временно недоступен"
-          description="Не удалось получить материал из системы публикации. Попробуйте обновить страницу позже."
+          description="Не удалось загрузить видеоматериал. Попробуйте обновить страницу позже."
         />
       </Section>
     )
@@ -111,7 +111,7 @@ function MediaDetailsPage() {
         ) : (
           <EmptyState
             className="mt-8"
-            title="Видео будет добавлено"
+            title="Видео не опубликовано"
             description="Файл видеоматериала пока недоступен."
           />
         )}

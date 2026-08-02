@@ -46,7 +46,7 @@ function DocumentsPage() {
         <EmptyState
           className="mt-8"
           title="Загружаем документы"
-          description="Каталог появится через несколько секунд."
+          description="Пожалуйста, подождите немного."
         />
       ) : null}
 
@@ -54,7 +54,7 @@ function DocumentsPage() {
         <EmptyState
           className="mt-8"
           title="Документы временно недоступны"
-          description="Не удалось получить каталог из системы публикации. Попробуйте обновить страницу позже."
+          description="Не удалось загрузить каталог. Попробуйте обновить страницу позже."
         />
       ) : null}
 
@@ -100,7 +100,7 @@ function DocumentsPage() {
                   </a>
                 ) : (
                   <span className="text-sm text-[color:var(--muted-foreground)]">
-                    Файл будет добавлен
+                    Файл не опубликован
                   </span>
                 )}
               </li>
@@ -113,7 +113,7 @@ function DocumentsPage() {
         <EmptyState
           className="mt-8"
           title="Документы пока не опубликованы"
-          description="Проверенные материалы появятся здесь после публикации."
+          description="Новые материалы появятся в этом разделе."
         />
       ) : null}
     </Section>

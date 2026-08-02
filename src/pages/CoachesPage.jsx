@@ -18,7 +18,7 @@ function CoachCard({ coach }) {
             loading="lazy"
           />
         ) : (
-          <MediaPlaceholder label="Фотография готовится к публикации" icon={Users} />
+          <MediaPlaceholder label="Фотография не опубликована" icon={Users} />
         )}
       </div>
       <div className="p-5 sm:p-6">
@@ -45,15 +45,15 @@ function CoachesPage() {
   return (
     <>
       <Section className="pt-2 sm:pt-4">
-        <div className="border border-[color:var(--border)] bg-[color:var(--surface)] p-6 sm:p-8 lg:p-10">
-          <p className="text-xs uppercase tracking-[0.24em] text-[color:var(--muted-foreground)]">
+        <div className="border-l-4 border-[color:var(--accent-red)] py-4 pl-6 sm:pl-8 lg:py-8 lg:pl-10">
+          <p className="text-sm font-medium text-[color:var(--muted-foreground)]">
             Тренеры
           </p>
           <h1 className="mt-4 max-w-4xl text-4xl font-semibold tracking-[-0.05em] text-[color:var(--foreground)] sm:text-5xl sm:leading-[1.05]">
-            Тренеры, которые воспитывают чемпионов
+            Тренерский состав Федерации
           </h1>
           <p className="mt-5 max-w-2xl text-base leading-8 text-[color:var(--muted-foreground)] sm:text-lg">
-            Опыт, характер и преданность спорту — основа чеченской школы самбо
+            Специалисты по спортивному, боевому и детско-юношескому самбо.
           </p>
         </div>
       </Section>
@@ -61,8 +61,8 @@ function CoachesPage() {
       <Section className="pt-16 pb-16 sm:pt-20 sm:pb-20">
         <SectionHeading
           eyebrow="Тренерский состав"
-          title="Школа, в которой растут победители"
-          description="Наставники Федерации передают спортсменам спортивную культуру, дисциплину и опыт больших соревнований."
+          title="Наставники спортсменов"
+          description="Тренеры отвечают за подготовку сборных команд, молодых спортсменов и спортивного резерва."
         />
         <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
           {coaches.map((coach) => (

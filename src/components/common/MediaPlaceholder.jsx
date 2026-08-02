@@ -1,7 +1,7 @@
 import { ImageOff, Users } from 'lucide-react'
 
 function MediaPlaceholder({
-  label = 'Фотография готовится к публикации',
+  label = 'Фотография не опубликована',
   icon: Icon = ImageOff,
   className = '',
   compact = false,

@@ -26,7 +26,7 @@ function MediaCard({ item }) {
           />
         ) : (
           <div className="flex aspect-video shrink-0 items-center justify-center border-b border-[color:var(--border)] bg-[color:var(--surface-strong)] px-5 text-center text-sm text-[color:var(--muted-foreground)]">
-            Видео будет добавлено
+            Видео не опубликовано
           </div>
         )}
 

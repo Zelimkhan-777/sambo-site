@@ -19,12 +19,11 @@ function HeroSection() {
       <HeroSlider slides={heroSlides}>
         <div className="max-w-2xl">
           <h1 className="max-w-xl text-5xl font-semibold leading-[0.92] tracking-[-0.02em] sm:text-6xl lg:text-7xl">
-            Сила. Дисциплина. Традиции.
+            Самбо Чеченской Республики
           </h1>
           <p className="mt-6 max-w-xl text-base leading-8 text-white/80 sm:text-lg">
-            Федерация развивает спортивное и боевое самбо в Чеченской
-            Республике, поддерживает подготовку спортсменов и объединяет работу
-            тренеров, судей и профильных спортивных инициатив.
+            Федерация развивает спортивное и боевое самбо, координирует
+            подготовку спортсменов и работу тренерского сообщества региона.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <Button to="/about">О Федерации</Button>
@@ -69,15 +68,15 @@ function AboutPreview() {
           <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-black/10" />
           <div className="relative flex min-h-[312px] flex-col justify-between">
             <div className="flex items-start justify-between gap-4">
-              <span className="border border-white/40 px-3 py-2 text-[10px] uppercase tracking-[0.2em] text-white/80">
-                Федерация / 01
+              <span className="border-l-2 border-white/70 pl-3 text-xs font-medium text-white/80">
+                О федерации
               </span>
               <ShieldCheck aria-hidden="true" className="text-white/80" size={25} strokeWidth={1.4} />
             </div>
             <div className="max-w-md">
-              <p className="text-xs uppercase tracking-[0.18em] text-white/65">Система развития</p>
+              <p className="text-sm font-medium text-white/65">Подготовка спортсменов</p>
               <p className="mt-3 text-2xl font-medium leading-tight text-white sm:text-3xl">
-                От первых тренировок до большой спортивной сцены.
+                Последовательная работа с молодыми спортсменами и спортивным резервом.
               </p>
             </div>
           </div>
@@ -99,7 +98,7 @@ function AboutPreview() {
             return (
             <li
               key={point}
-              className="group flex items-start gap-4 border border-[color:var(--border)] bg-[color:var(--surface)] px-5 py-6 transition-colors duration-200 hover:border-[color:var(--border-strong)]"
+              className="group flex items-start gap-4 border-b border-[color:var(--border)] px-1 py-6 transition-colors duration-200 hover:border-[color:var(--border-strong)]"
             >
               <Icon aria-hidden="true" className="mt-0.5 shrink-0 text-[color:var(--accent-red)] transition-transform duration-200 group-hover:scale-110" size={22} strokeWidth={1.5} />
               <span className="text-sm leading-7 text-[color:var(--foreground)]">{point}</span>
@@ -138,7 +137,7 @@ function LatestNews() {
       <SectionHeading
         eyebrow="Новости"
         title="Последние материалы"
-        description="Последние официальные новости и материалы Федерации."
+        description="Соревнования, учебные сборы и текущая работа Федерации."
         action={
           <Button to="/news" variant="text">
             Все новости
@@ -149,8 +148,8 @@ function LatestNews() {
       {status === "loading" ? (
         <EmptyState
           className="mt-8"
-          title="Загружаем последние материалы"
-          description="Новости появятся через несколько секунд."
+          title="Новости загружаются"
+          description="Пожалуйста, подождите немного."
         />
       ) : null}
 
@@ -158,7 +157,7 @@ function LatestNews() {
         <EmptyState
           className="mt-8"
           title="Новости временно недоступны"
-          description="Не удалось получить последние материалы из системы публикации."
+          description="Не удалось загрузить материалы. Попробуйте обновить страницу позже."
         />
       ) : null}
 
@@ -173,8 +172,8 @@ function LatestNews() {
       {status === "success" && !latestNews.length ? (
         <EmptyState
           className="mt-8"
-          title="Материалы готовятся к публикации"
-          description="После проверки и подготовки официальных публикаций в этом разделе появятся последние новости федерации."
+          title="Публикаций пока нет"
+          description="Новые материалы появятся в этом разделе."
         />
       ) : null}
     </Section>
@@ -186,15 +185,15 @@ function ChampionsPreview() {
     <Section className="pt-16 sm:pt-20">
       <SectionHeading
         eyebrow="Наши чемпионы"
-        title="Имена, которыми гордится Чеченская Республика"
-        description="Выдающиеся представители чеченского самбо, чьи чемпионские титулы подтверждены профильными источниками."
+        title="Чемпионы чеченского самбо"
+        description="Спортсмены республики, добившиеся высоких результатов в спортивном и боевом самбо."
       />
 
       <div className="mt-8 grid gap-5 lg:grid-cols-2">
         {champions.map((champion) => (
           <article
             key={champion.id}
-            className="grid gap-5 border border-[color:var(--border)] bg-[color:var(--surface)] p-5 sm:grid-cols-[minmax(0,0.9fr)_minmax(0,1fr)] sm:p-6"
+            className="grid gap-5 border-t border-[color:var(--border-strong)] py-5 sm:grid-cols-[minmax(0,0.9fr)_minmax(0,1fr)] sm:py-6"
           >
             {championsMedia[champion.id] ? (
               <img
@@ -207,7 +206,7 @@ function ChampionsPreview() {
               <MediaPlaceholder
                 compact
                 icon={Award}
-                label="Фотография чемпиона готовится"
+                label="Фотография не опубликована"
               />
             )}
             <div>
@@ -234,14 +233,14 @@ function GrantsProjectsPreview() {
       <SectionHeading
         eyebrow="Поддержка и развитие"
         title="Гранты и социальные проекты"
-        description="Развиваем самбо, поддерживаем молодёжь и создаём возможности для спортивного роста"
+        description="Программы и инициативы в сфере детско-юношеского спорта и поддержки молодых спортсменов."
       />
 
       <div className="mt-8 grid gap-5 md:grid-cols-2">
         {grantProjects.map((project) => (
           <article
             key={project.id}
-            className="flex h-full flex-col border border-[color:var(--border)] bg-[color:var(--surface)] p-5 sm:p-6"
+            className="flex h-full flex-col border border-[color:var(--border)] bg-[color:var(--background)] p-5 sm:p-6"
           >
             <div className="flex min-h-40 items-center justify-center border border-[color:var(--border)] bg-white p-4 sm:min-h-44 dark:bg-white">
               <img
@@ -272,18 +271,18 @@ function GrantsProjectsPreview() {
 function ContactCTA() {
   return (
     <Section className="py-16 sm:py-20">
-      <div className="border border-[color:var(--border)] bg-[color:var(--surface)] p-6 sm:p-8 lg:p-10">
+      <div className="border-l-4 border-[color:var(--accent-red)] bg-[color:var(--surface)] p-6 sm:p-8 lg:p-10">
         <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.9fr)]">
           <div>
             <p className="text-xs uppercase tracking-[0.24em] text-[color:var(--muted-foreground)]">
               Контакты
             </p>
             <h2 className="mt-3 text-3xl font-semibold tracking-[-0.04em] text-[color:var(--foreground)]">
-              Для спортсменов, родителей, тренеров и партнёров
+              Связаться с федерацией
             </h2>
             <p className="mt-4 max-w-2xl text-sm leading-8 text-[color:var(--muted-foreground)]">
-              Федерация открыта для рабочих обращений, уточнения информации и
-              взаимодействия по вопросам развития самбо в регионе.
+              По вопросам тренировок, соревнований и сотрудничества используйте
+              официальные контактные данные.
             </p>
           </div>
 

@@ -39,15 +39,15 @@ export const heroMedia = {
 export const heroSlides = [
   {
     ...heroMedia,
-    caption: "Растим подрастающее поколение спортсменов",
+    caption: "Подготовка молодых спортсменов",
   },
 
   {
     id: "sambo03",
     src: sambo03,
     srcSet: `${sambo03Small} 640w, ${sambo03} 1280w`,
-    alt: "Чемпионы мирового уровня",
-    caption: "Чемпионы мирового уровня",
+    alt: "Спортсмены на сборах по самбо в Шали",
+    caption: "Учебно-тренировочные сборы",
     sourceName: "Всероссийская федерация самбо: сборы по самбо в Шали",
     sourceUrl: "https://sambo.ru/press/news/2024/11003/",
     category: "hero",
@@ -60,7 +60,7 @@ export const heroSlides = [
     src: sambo01,
     srcSet: `${sambo01Small} 640w, ${sambo01} 1025w`,
     alt: "Спортсмены во время соревнований по самбо в Шали",
-    caption: "Результат упорной работы",
+    caption: "Соревнования по самбо",
     sourceName: regionalNewsSourceName,
     sourceUrl: regionalNewsUrl,
     category: "hero",
@@ -71,7 +71,7 @@ export const heroSlides = [
     id: "grozny-skfo-award",
     src: newsImage03,
     alt: "Награждение спортсмена на соревнованиях по самбо в Грозном",
-    caption: "Лучший момент для каждого спорстмена",
+    caption: "Церемония награждения",
     sourceName: regionalNewsSourceName,
     sourceUrl: regionalNewsUrl,
     category: "hero",

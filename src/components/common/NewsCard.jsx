@@ -8,7 +8,7 @@ function NewsCard({ item }) {
 
   return (
     <motion.article
-      className="group flex h-full flex-col border border-[color:var(--border)] bg-[color:var(--surface)] transition-colors duration-200 ease-out hover:border-[color:var(--border-strong)]"
+      className="group flex h-full flex-col border-b border-[color:var(--border-strong)] bg-transparent transition-colors duration-200 ease-out"
       whileHover={shouldReduceMotion ? undefined : { y: -4 }}
       transition={{ duration: 0.2, ease: 'easeOut' }}
     >
@@ -17,7 +17,7 @@ function NewsCard({ item }) {
         className="flex h-full flex-col focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-blue)] focus-visible:ring-offset-2 focus-visible:ring-offset-[color:var(--background)]"
       >
         {item.coverImage ? (
-          <div className="relative aspect-[16/10] shrink-0 overflow-hidden border-b border-[color:var(--border)] bg-[color:var(--surface-strong)]">
+          <div className="relative aspect-[16/10] shrink-0 overflow-hidden bg-[color:var(--surface-strong)]">
             <img
               alt={item.imageAlt || item.title}
               className="h-full w-full object-cover"
@@ -34,14 +34,14 @@ function NewsCard({ item }) {
           <MediaPlaceholder
             className="aspect-[16/10] border-0 border-b"
             compact
-            label={item.isTemporary ? 'Иллюстративное фото' : 'Фотография готовится к публикации'}
+            label={item.isTemporary ? 'Иллюстративное фото' : 'Фотография не опубликована'}
           />
         )}
 
-        <div className="flex flex-1 flex-col px-5 py-5">
+        <div className="flex flex-1 flex-col py-5">
           {item.publishedAt ? (
             <time
-              className="text-[11px] uppercase tracking-[0.16em] text-[color:var(--muted-foreground)]"
+              className="text-xs font-medium text-[color:var(--muted-foreground)]"
               dateTime={item.publishedAt}
             >
               {formatNewsDate(item.publishedAt)}
