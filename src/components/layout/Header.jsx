@@ -5,7 +5,7 @@ import MobileMenu from "./MobileMenu";
 import { navigationItems } from "./navigation";
 import Container from "../ui/Container";
 import ThemeToggle from "../ui/ThemeToggle";
-import logo from "../../assets/icons/logo.png";
+import logo from "../../assets/icons/logo-128.png";
 
 function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);

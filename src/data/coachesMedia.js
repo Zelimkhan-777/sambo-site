@@ -1,7 +1,7 @@
-import sheikhMansurImage from '../assets/images/optimized/champions-sheikh-mansur.jpg';
+import sheikhMansurImage from '../assets/images/optimized/champions-sheikh-mansur-640.jpg';
 import uspaevImage from '../assets/images/optimized/coaches/uspaev.jpg';
 import ibragimovImage from '../assets/images/optimized/coaches/ibragimov.jpg';
-import chimaevImage from '../assets/images/optimized/coaches/chimaev.jpg';
+import chimaevImage from '../assets/images/optimized/coaches/chimaev-640.jpg';
 import talkhigovImage from '../assets/images/optimized/coaches/talkhigov.jpg';
 
 export const coachesMedia = {

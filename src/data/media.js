@@ -1,19 +1,22 @@
 import hasmagomedDikievAltImage from "../assets/images/optimized/champions-hasmagomed-dikiev-alt.png";
 import adlanBisultanovImage from "../assets/images/optimized/champions-adlan-bisultanov.jpg";
 import samboChampsImage from "../assets/images/optimized/samboChamps.webp";
-import sheikhMansurImage from "../assets/images/optimized/champions-sheikh-mansur.jpg";
-import rustamKagermanovImage from "../assets/images/raw/leadership/rustam-kagermanov-01.jpeg";
-import turpalAliIbragimovImage from "../assets/images/raw/leadership/turpal-ali-ibragimov.jpg";
-import newsImage03 from "../assets/images/optimized/news/grozny-skfo-03.jpg";
+import sheikhMansurImage from "../assets/images/optimized/champions-sheikh-mansur-640.jpg";
+import rustamKagermanovImage from "../assets/images/optimized/leadership/rustam-kagermanov.jpg";
+import turpalAliIbragimovImage from "../assets/images/optimized/leadership/turpal-ali-ibragimov.jpg";
+import newsImage03 from "../assets/images/optimized/news/grozny-skfo-03-500.jpg";
 import activitySportImage from "../assets/images/optimized/activity/sport-sambo-2026.jpg";
 import activityCombatImage from "../assets/images/optimized/activity/combat-sambo-2025.jpg";
 import activityYouthImage from "../assets/images/optimized/activity/youth-sambo-2026.jpg";
 import activityReserveImage from "../assets/images/optimized/activity/reserve-sambo-2026.jpg";
 import activityEventsImage from "../assets/images/optimized/activity/events-sambo-2026.jpg";
-import activityJudgingImage from "../assets/images/optimized/activity/judging-sambo-2024.jpg";
-import sambokids from "../assets/images/optimized/hero/sambokids.jpg";
-import sambo01 from "../assets/images/optimized/hero/sambo01.jpg";
-import sambo03 from "../assets/images/optimized/hero/sambo03.jpg";
+import activityJudgingImage from "../assets/images/optimized/activity/judging-sambo-2024-perf.jpg";
+import sambokids from "../assets/images/optimized/hero/sambokids-1200.jpg";
+import sambokidsSmall from "../assets/images/optimized/hero/sambokids-640.jpg";
+import sambo01 from "../assets/images/optimized/hero/sambo01-1025.jpg";
+import sambo01Small from "../assets/images/optimized/hero/sambo01-640.jpg";
+import sambo03 from "../assets/images/optimized/hero/sambo03-1280.jpg";
+import sambo03Small from "../assets/images/optimized/hero/sambo03-640.jpg";
 
 const samboArchiveUrl = "https://www.sambo.ru/photo/2026/4696/";
 const samboSourceName = "Фотоархив Всероссийской федерации самбо";
@@ -24,6 +27,7 @@ const regionalNewsSourceName =
 export const heroMedia = {
   id: "sambokids",
   src: sambokids,
+  srcSet: `${sambokidsSmall} 640w, ${sambokids} 1200w`,
   alt: "Спортсмены во время поединка по самбо",
   sourceName: samboSourceName,
   sourceUrl: samboArchiveUrl,
@@ -41,6 +45,7 @@ export const heroSlides = [
   {
     id: "sambo03",
     src: sambo03,
+    srcSet: `${sambo03Small} 640w, ${sambo03} 1280w`,
     alt: "Чемпионы мирового уровня",
     caption: "Чемпионы мирового уровня",
     sourceName: "Всероссийская федерация самбо: сборы по самбо в Шали",
@@ -53,6 +58,7 @@ export const heroSlides = [
   {
     id: "grozny-skfo-action",
     src: sambo01,
+    srcSet: `${sambo01Small} 640w, ${sambo01} 1025w`,
     alt: "Спортсмены во время соревнований по самбо в Шали",
     caption: "Результат упорной работы",
     sourceName: regionalNewsSourceName,

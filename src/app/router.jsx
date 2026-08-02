@@ -1,15 +1,17 @@
 import { createBrowserRouter } from 'react-router-dom'
 import Layout from '../components/layout/Layout'
-import AboutPage from '../pages/AboutPage'
-import CoachesPage from '../pages/CoachesPage'
-import DocumentsPage from '../pages/DocumentsPage'
-import GrantsPage from '../pages/GrantsPage'
-import HomePage from '../pages/HomePage'
-import MediaPage from '../pages/MediaPage'
-import MediaDetailsPage from '../pages/MediaDetailsPage'
-import NewsDetailsPage from '../pages/NewsDetailsPage'
-import NewsPage from '../pages/NewsPage'
-import NotFoundPage from '../pages/NotFoundPage'
+import {
+  AboutPage,
+  CoachesPage,
+  DocumentsPage,
+  GrantsPage,
+  HomePage,
+  MediaDetailsPage,
+  MediaPage,
+  NewsDetailsPage,
+  NewsPage,
+  NotFoundPage,
+} from './lazyPages'
 
 export const router = createBrowserRouter([
   {

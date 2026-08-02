@@ -50,7 +50,10 @@ function HeroSlider({ slides, children }) {
           animate={{ opacity: 1, scale: 1 }}
           exit={shouldReduceMotion ? undefined : { opacity: 0 }}
           transition={{ duration: shouldReduceMotion ? 0 : 0.7, ease: 'easeOut' }}
+          decoding="async"
+          sizes="(max-width: 767px) calc(100vw - 32px), (max-width: 1279px) calc(100vw - 48px), 1216px"
           src={activeSlide.src}
+          srcSet={activeSlide.srcSet}
         />
       </AnimatePresence>
 
