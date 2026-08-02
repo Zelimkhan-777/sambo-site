@@ -1,6 +1,49 @@
 import { motion, useReducedMotion } from 'framer-motion'
-import { Play } from 'lucide-react'
+import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
+
+function LazyVideoPreview({ src }) {
+  const containerRef = useRef(null)
+  const [shouldLoad, setShouldLoad] = useState(false)
+
+  useEffect(() => {
+    const element = containerRef.current
+
+    if (!element || !('IntersectionObserver' in window)) {
+      setShouldLoad(true)
+      return undefined
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShouldLoad(true)
+          observer.disconnect()
+        }
+      },
+      { rootMargin: '200px' },
+    )
+
+    observer.observe(element)
+    return () => observer.disconnect()
+  }, [])
+
+  return (
+    <div ref={containerRef} className="aspect-video shrink-0 bg-neutral-950">
+      {shouldLoad && (
+        <video
+          aria-hidden="true"
+          className="pointer-events-none h-full w-full object-cover"
+          muted
+          playsInline
+          preload="metadata"
+          src={`${src}#t=0.001`}
+          tabIndex={-1}
+        />
+      )}
+    </div>
+  )
+}
 
 function MediaCard({ item }) {
   const shouldReduceMotion = useReducedMotion()
@@ -16,12 +59,7 @@ function MediaCard({ item }) {
         to={`/media/${item.slug}`}
       >
         {item.videoUrl ? (
-          <div className="flex aspect-video shrink-0 items-center justify-center border-b border-[color:var(--border)] bg-neutral-950 text-white">
-            <span className="flex size-12 items-center justify-center rounded-full border border-white/30 bg-white/10 transition-colors group-hover:bg-white/20">
-              <Play aria-hidden="true" className="ml-0.5 size-5" fill="currentColor" />
-            </span>
-            <span className="sr-only">Открыть видео</span>
-          </div>
+          <LazyVideoPreview src={item.videoUrl} />
         ) : (
           <div className="flex aspect-video shrink-0 items-center justify-center border-b border-[color:var(--border)] bg-[color:var(--surface-strong)] px-5 text-center text-sm text-[color:var(--muted-foreground)]">
             Видео не опубликовано
