@@ -4,6 +4,7 @@ import Footer from './Footer'
 import Header from './Header'
 import ScrollToTop from './ScrollToTop'
 import RouteSeo from './RouteSeo'
+import { RouteSkeleton } from '../common/LoadingSkeleton'
 
 function Layout() {
   return (
@@ -14,14 +15,7 @@ function Layout() {
         <Header />
         <main className="flex-1 py-8 sm:py-10">
           <Suspense
-            fallback={(
-              <div
-                className="mx-auto w-full max-w-7xl px-4 py-12 text-sm text-[color:var(--muted-foreground)] sm:px-6"
-                role="status"
-              >
-                Загрузка страницы...
-              </div>
-            )}
+            fallback={<RouteSkeleton />}
           >
             <Outlet />
           </Suspense>

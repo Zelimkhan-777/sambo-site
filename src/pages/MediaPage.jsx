@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { getMediaPage } from '../api/mediaApi'
 import EmptyState from '../components/common/EmptyState'
+import { CardGridSkeleton } from '../components/common/LoadingSkeleton'
 import MediaCard from '../components/common/MediaCard'
 import Pagination from '../components/common/Pagination'
 import Section from '../components/common/Section'
@@ -78,11 +79,7 @@ function MediaPage() {
       />
 
       {status === 'loading' ? (
-        <EmptyState
-          className="mt-8"
-          title="Загружаем видеоматериалы"
-          description="Пожалуйста, подождите немного."
-        />
+        <CardGridSkeleton className="mt-8" count={6} />
       ) : null}
 
       {status === 'error' ? (

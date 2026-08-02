@@ -2,6 +2,7 @@ import Button from "../components/ui/Button";
 import { useEffect, useState } from "react";
 import { getNews } from "../api/newsApi";
 import EmptyState from "../components/common/EmptyState";
+import { CardGridSkeleton } from "../components/common/LoadingSkeleton";
 import HeroSlider from "../components/common/HeroSlider";
 import MediaPlaceholder from "../components/common/MediaPlaceholder";
 import NewsCard from "../components/common/NewsCard";
@@ -146,11 +147,7 @@ function LatestNews() {
       />
 
       {status === "loading" ? (
-        <EmptyState
-          className="mt-8"
-          title="Новости загружаются"
-          description="Пожалуйста, подождите немного."
-        />
+        <CardGridSkeleton className="mt-8" />
       ) : null}
 
       {status === "error" ? (

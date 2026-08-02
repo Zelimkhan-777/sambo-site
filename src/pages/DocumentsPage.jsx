@@ -2,6 +2,7 @@ import { Download, FileText } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { getDocuments } from '../api/documentsApi'
 import EmptyState from '../components/common/EmptyState'
+import { DocumentListSkeleton } from '../components/common/LoadingSkeleton'
 import Section from '../components/common/Section'
 import SectionHeading from '../components/common/SectionHeading'
 import { formatNewsDate } from '../utils/news'
@@ -43,11 +44,7 @@ function DocumentsPage() {
       />
 
       {status === 'loading' ? (
-        <EmptyState
-          className="mt-8"
-          title="Загружаем документы"
-          description="Пожалуйста, подождите немного."
-        />
+        <DocumentListSkeleton className="mt-8" />
       ) : null}
 
       {status === 'error' ? (

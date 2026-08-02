@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import { getMediaBySlug } from '../api/mediaApi'
 import Breadcrumbs from '../components/common/Breadcrumbs'
 import EmptyState from '../components/common/EmptyState'
+import { DetailSkeleton } from '../components/common/LoadingSkeleton'
 import Section from '../components/common/Section'
 import Button from '../components/ui/Button'
 import NotFoundPage from './NotFoundPage'
@@ -41,10 +42,7 @@ function MediaDetailsPage() {
   if (status === 'loading') {
     return (
       <Section className="pt-2 sm:pt-4">
-        <EmptyState
-          title="Загружаем видеоматериал"
-          description="Пожалуйста, подождите немного."
-        />
+        <DetailSkeleton />
       </Section>
     )
   }

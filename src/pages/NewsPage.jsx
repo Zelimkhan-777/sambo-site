@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { getNewsPage } from '../api/newsApi'
 import EmptyState from '../components/common/EmptyState'
+import { CardGridSkeleton } from '../components/common/LoadingSkeleton'
 import NewsCard from '../components/common/NewsCard'
 import Pagination from '../components/common/Pagination'
 import Section from '../components/common/Section'
@@ -78,11 +79,7 @@ function NewsPage() {
       />
 
       {status === 'loading' ? (
-        <EmptyState
-          className="mt-8"
-          title="Загружаем новости"
-          description="Пожалуйста, подождите немного."
-        />
+        <CardGridSkeleton className="mt-8" count={6} />
       ) : null}
 
       {status === 'error' ? (

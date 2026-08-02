@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import { getNews, getNewsBySlug } from '../api/newsApi'
 import Breadcrumbs from '../components/common/Breadcrumbs'
 import EmptyState from '../components/common/EmptyState'
+import { DetailSkeleton } from '../components/common/LoadingSkeleton'
 import MediaPlaceholder from '../components/common/MediaPlaceholder'
 import NewsCard from '../components/common/NewsCard'
 import Section from '../components/common/Section'
@@ -97,10 +98,7 @@ function NewsDetailsPage() {
   if (pageStatus === 'loading') {
     return (
       <Section className="pt-2 sm:pt-4">
-        <EmptyState
-          title="Загружаем материал"
-          description="Пожалуйста, подождите немного."
-        />
+        <DetailSkeleton />
       </Section>
     )
   }
