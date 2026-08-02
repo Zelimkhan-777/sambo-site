@@ -1,4 +1,5 @@
 import { motion, useReducedMotion } from 'framer-motion'
+import { Play } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
 function MediaCard({ item }) {
@@ -15,15 +16,12 @@ function MediaCard({ item }) {
         to={`/media/${item.slug}`}
       >
         {item.videoUrl ? (
-          <video
-            aria-hidden="true"
-            className="pointer-events-none aspect-video w-full shrink-0 bg-neutral-950 object-cover"
-            muted
-            playsInline
-            preload="metadata"
-            src={item.videoUrl}
-            tabIndex={-1}
-          />
+          <div className="flex aspect-video shrink-0 items-center justify-center border-b border-[color:var(--border)] bg-neutral-950 text-white">
+            <span className="flex size-12 items-center justify-center rounded-full border border-white/30 bg-white/10 transition-colors group-hover:bg-white/20">
+              <Play aria-hidden="true" className="ml-0.5 size-5" fill="currentColor" />
+            </span>
+            <span className="sr-only">Открыть видео</span>
+          </div>
         ) : (
           <div className="flex aspect-video shrink-0 items-center justify-center border-b border-[color:var(--border)] bg-[color:var(--surface-strong)] px-5 text-center text-sm text-[color:var(--muted-foreground)]">
             Видео не опубликовано

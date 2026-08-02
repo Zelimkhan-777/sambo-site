@@ -5,6 +5,7 @@ import Breadcrumbs from '../components/common/Breadcrumbs'
 import EmptyState from '../components/common/EmptyState'
 import { DetailSkeleton } from '../components/common/LoadingSkeleton'
 import Section from '../components/common/Section'
+import VideoPlayer from '../components/common/VideoPlayer'
 import Button from '../components/ui/Button'
 import NotFoundPage from './NotFoundPage'
 import Seo from '../components/common/Seo'
@@ -96,16 +97,7 @@ function MediaDetailsPage() {
         </h1>
 
         {item.videoUrl ? (
-          <video
-            aria-label={item.title}
-            className="mt-8 aspect-video w-full border border-[color:var(--border)] bg-neutral-950 object-contain"
-            controls
-            playsInline
-            preload="metadata"
-            src={item.videoUrl}
-          >
-            Ваш браузер не поддерживает воспроизведение видео.
-          </video>
+          <VideoPlayer src={item.videoUrl} title={item.title} />
         ) : (
           <EmptyState
             className="mt-8"
