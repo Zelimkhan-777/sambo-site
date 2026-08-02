@@ -30,14 +30,10 @@
         const storageKey = 'sambo-theme'
         const root = document.documentElement
         const storedTheme = window.localStorage.getItem(storageKey)
-        const systemTheme = window.matchMedia('(prefers-color-scheme: dark)')
-          .matches
-          ? 'dark'
-          : 'light'
         const theme =
           storedTheme === 'light' || storedTheme === 'dark'
             ? storedTheme
-            : systemTheme
+            : 'dark'
 
         root.dataset.theme = theme
         root.classList.toggle('dark', theme === 'dark')

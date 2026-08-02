@@ -1,12 +1,15 @@
-import { Link } from 'react-router-dom'
-import { navigationItems } from './navigation'
-import Container from '../ui/Container'
+import { Link } from "react-router-dom";
+import { navigationItems } from "./navigation";
+import Container from "../ui/Container";
 
-function Footer({ className = '' }) {
-  const currentYear = new Date().getFullYear()
+function Footer({ className = "" }) {
+  const currentYear = new Date().getFullYear();
 
   return (
-    <footer id="contacts" className={`mt-auto border-t border-[color:var(--border)] bg-[color:var(--surface)] ${className}`}>
+    <footer
+      id="contacts"
+      className={`mt-auto border-t border-[color:var(--border)] bg-[color:var(--surface)] ${className}`}
+    >
       <Container className="py-7 sm:py-8">
         <div className="grid gap-7 lg:grid-cols-[minmax(0,1.25fr)_minmax(0,0.8fr)_minmax(0,1fr)] lg:gap-8">
           <div className="space-y-3">
@@ -18,7 +21,8 @@ function Footer({ className = '' }) {
               «Федерация самбо Чеченской Республики»
             </h2>
             <p className="max-w-xl text-xs leading-6 text-[color:var(--muted-foreground)]">
-              Официальная информация о работе Федерации, соревнованиях и развитии самбо в регионе.
+              Официальная информация о работе Федерации, соревнованиях и
+              развитии самбо в регионе.
             </p>
           </div>
 
@@ -30,7 +34,10 @@ function Footer({ className = '' }) {
               {navigationItems.map((item) => (
                 <li key={item.to}>
                   {item.isAnchor ? (
-                    <a href={item.to} className="transition-colors duration-200 hover:text-[color:var(--foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-blue)] focus-visible:ring-offset-2 focus-visible:ring-offset-[color:var(--surface)]">
+                    <a
+                      href={item.to}
+                      className="transition-colors duration-200 hover:text-[color:var(--foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-blue)] focus-visible:ring-offset-2 focus-visible:ring-offset-[color:var(--surface)]"
+                    >
                       {item.label}
                     </a>
                   ) : (
@@ -50,7 +57,7 @@ function Footer({ className = '' }) {
             <h2 className="text-sm font-semibold uppercase tracking-[0.2em] text-[color:var(--foreground)]">
               Контакты
             </h2>
-            <p>364051, г. Грозный, ул. Мира, 53 «А».</p>
+            <p> 366328, г. Шали, № 30, ул. Чичерина,</p>
             <p>
               <a
                 href="tel:+79637037550"
@@ -75,7 +82,7 @@ function Footer({ className = '' }) {
         </div>
       </Container>
     </footer>
-  )
+  );
 }
 
-export default Footer
+export default Footer;
