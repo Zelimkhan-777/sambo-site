@@ -2,7 +2,7 @@ import hasmagomedDikievAltImage from "../assets/images/optimized/champions-hasma
 import adlanBisultanovImage from "../assets/images/optimized/champions-adlan-bisultanov.jpg";
 import samboChampsImage from "../assets/images/optimized/samboChamps.webp";
 import sheikhMansurImage from "../assets/images/optimized/champions-sheikh-mansur-640.jpg";
-import rustamKagermanovImage from "../assets/images/optimized/leadership/rustam-kagermanov.jpg";
+import rustamKagermanovImage from "../assets/images/raw/leadership/rustam-kagermanov-01.jpeg";
 import turpalAliIbragimovImage from "../assets/images/optimized/leadership/turpal-ali-ibragimov.jpg";
 import newsImage03 from "../assets/images/optimized/news/grozny-skfo-03-500.jpg";
 import activitySportImage from "../assets/images/optimized/activity/sport-sambo-2026.jpg";
