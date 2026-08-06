@@ -1,16 +1,104 @@
-# React + Vite
+# Федерация самбо Чеченской Республики
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Современный адаптивный сайт региональной Федерации самбо. Проект объединяет официальную информацию о федерации, новости, документы, грантовые программы, тренерский состав и медиаматериалы в строгом спортивном интерфейсе.
 
-Currently, two official plugins are available:
+![React](https://img.shields.io/badge/React-19-149eca?logo=react&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-8-646cff?logo=vite&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-38bdf8?logo=tailwindcss&logoColor=white)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Возможности
 
-## React Compiler
+- Многостраничная навигация с отдельными страницами новостей и медиаматериалов.
+- Светлая и тёмная темы с сохранением выбора пользователя.
+- Адаптивный интерфейс и мобильное меню.
+- Каталоги документов, грантов и тренерского состава.
+- Данные новостей и медиа из Directus с аккуратными состояниями загрузки и ошибок.
+- SEO-метаданные, `robots.txt`, `sitemap.xml` и отдельные HTML-входы для ключевых маршрутов.
+- Доступная семантическая разметка, заметные состояния фокуса и поддержка reduced motion.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Разделы сайта
 
-## Expanding the ESLint configuration
+| Маршрут | Раздел |
+| --- | --- |
+| `/` | Главная страница |
+| `/about` | О Федерации |
+| `/news` | Новости |
+| `/news/:slug` | Материал новости |
+| `/media` | Медиа |
+| `/media/:slug` | Материал медиа |
+| `/coaches` | Тренерский состав |
+| `/documents` | Документы |
+| `/grants` | Гранты и программы поддержки |
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Стек
+
+- React 19 и React Router
+- Vite
+- Tailwind CSS 4
+- Framer Motion
+- Lucide React
+- Directus REST API
+
+## Быстрый старт
+
+Требуется Node.js 22 или новее.
+
+```bash
+npm install
+Copy-Item .env.example .env.local
+npm run dev
+```
+
+После запуска Vite покажет адрес локального сервера в терминале.
+
+## Переменные окружения
+
+Создайте `.env.local` по примеру [`.env.example`](.env.example).
+
+```env
+VITE_DIRECTUS_URL=https://your-directus.example
+VITE_SITE_URL=https://your-domain.example
+```
+
+`VITE_DIRECTUS_URL` задаёт адрес CMS с новостями и медиаматериалами. `VITE_SITE_URL` необходим production-сборке для генерации абсолютных ссылок в `sitemap.xml`.
+
+## Команды
+
+| Команда | Назначение |
+| --- | --- |
+| `npm run dev` | Запустить сервер разработки |
+| `npm run lint` | Проверить код ESLint |
+| `npm run build` | Создать production-сборку и SEO-файлы |
+| `npm run preview` | Открыть локальный просмотр production-сборки |
+
+## Структура проекта
+
+```text
+src/
+├── api/          # Клиент и запросы к Directus
+├── app/          # Роутер, приложение и провайдер темы
+├── assets/       # Локальные изображения, логотипы и иконки
+├── components/   # Layout, UI и общие компоненты
+├── data/         # Статичные подтверждённые данные
+├── hooks/        # Пользовательские React-хуки
+├── pages/        # Страницы маршрутов
+├── styles/       # Глобальные стили и цветовые переменные
+└── utils/        # Вспомогательные функции
+```
+
+## Сборка и публикация
+
+```bash
+npm run lint
+npm run build
+```
+
+Готовые файлы находятся в `dist/`. Настройте хостинг так, чтобы существующие `*/index.html` отдавались напрямую, а остальные SPA-маршруты направлялись на корневой `index.html`. Подробнее — в [инструкции по SEO и публикации](docs/seo-deployment.md).
+
+## Контент и источники
+
+Публичные данные и изображения должны использоваться только после проверки официальных источников. Карточки без подтверждённых данных отображают нейтральные состояния вместо вымышленных сведений. Требования к контенту и архитектуре проекта описаны в [документации](docs/project-requirements.md).
+
+---
+
+Сделано для развития самбо в Чеченской Республике.
